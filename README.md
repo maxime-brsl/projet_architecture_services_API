@@ -1,4 +1,4 @@
 # architectureAPI
 
-Maxime Brasley
-Julie Barthet
+* Maxime Brasley
+* Julie Barthet
