@@ -1,4 +1,4 @@
-package com.miage.RealDeal.Entity;
+package com.miage.user.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

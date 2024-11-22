@@ -1,6 +1,6 @@
-package com.miage.RealDeal.Repository;
+package com.miage.user.Repository;
 
-import com.miage.RealDeal.Entity.User;
+import com.miage.user.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

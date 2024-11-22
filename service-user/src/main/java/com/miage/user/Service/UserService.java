@@ -1,9 +1,9 @@
-package com.miage.RealDeal.Service;
+package com.miage.user.Service;
 
-import com.miage.RealDeal.Entity.User;
-import com.miage.RealDeal.Repository.UserRepository;
-import com.miage.RealDeal.Security.JwtUtil;
-import com.miage.RealDeal.Messaging.UserEventPublisher;
+import com.miage.user.Entity.User;
+import com.miage.user.Repository.UserRepository;
+import com.miage.user.Security.JwtUtil;
+import com.miage.user.Messaging.UserEventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

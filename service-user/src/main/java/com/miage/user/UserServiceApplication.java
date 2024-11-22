@@ -1,13 +1,12 @@
-package com.miage.RealDeal;
+package com.miage.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RealDealApplication {
+public class UserServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RealDealApplication.class, args);
+		SpringApplication.run(UserServiceApplication.class, args);
 	}
-
 }

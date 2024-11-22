@@ -1,8 +1,8 @@
-package com.miage.RealDeal.Controller;
+package com.miage.user.Controller;
 
-import com.miage.RealDeal.Entity.User;
-import com.miage.RealDeal.Messaging.UserEventPublisher;
-import com.miage.RealDeal.Service.UserService;
+import com.miage.user.Entity.User;
+import com.miage.user.Messaging.UserEventPublisher;
+import com.miage.user.Service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.miage.RealDeal.Security;
+package com.miage.user.Security;
 
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;

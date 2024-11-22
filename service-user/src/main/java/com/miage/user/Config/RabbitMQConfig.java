@@ -1,4 +1,4 @@
-package com.miage.RealDeal.Config;
+package com.miage.user.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

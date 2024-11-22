@@ -1,10 +1,10 @@
-package com.miage.RealDeal.Messaging;
+package com.miage.user.Messaging;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.miage.RealDeal.Entity.User;
+import com.miage.user.Entity.User;
 
 @Service
 public class UserEventPublisher {
