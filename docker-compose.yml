@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  # Microservice utilisateur
+
+  service-user:
+    build:
+      context: service-user
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/users_db
+      - PORT=3001
+    depends_on:
+      - mongodb
+
+  # Gestion de la base de données
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,32 @@
+# Node.js
+node_modules/          # Dépendances locales (réinstallables avec npm install)
+npm-debug.log*         # Logs d'erreur générés par npm
+yarn-debug.log*        # Logs d'erreur générés par yarn
+yarn-error.log*        # Logs d'erreur générés par yarn
+
+# Logs
+logs/
+*.log                  # Fichiers de log (générés par votre app)
+npm-debug.log*
+debug.log
+error.log
+
+# Docker
+docker-compose.override.yml
+*.container-start.log  # Logs de démarrage des containers Docker
+
+# Production
+/build/                # Fichiers générés pour la production
+dist/                  # Fichiers compilés (si transpilation)
+
+# IDE/OS
+.DS_Store              # Fichier spécifique à macOS
+Thumbs.db              # Fichier spécifique à Windows
+.idea/                 # Configurations JetBrains (WebStorm, IntelliJ, etc.)
+.vscode/               # Configurations spécifiques à VS Code
+*.swp                  # Fichiers de sauvegarde (ex. Vim)
+
+# Tests
+coverage/              # Résultats de couverture des tests
+.nyc_output            # Résultats de couverture NYC
+jest-report.json       # Rapports générés par Jest
