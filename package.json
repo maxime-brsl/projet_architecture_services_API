@@ -4,7 +4,7 @@
   "description": "* Maxime Brasley\r * Julie Barthet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    //TODO lancer les microservices
   },
   "keywords": [],
   "author": "",

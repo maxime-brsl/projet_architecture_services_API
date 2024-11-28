@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.json());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Exemple route de base
 app.get('/', (req, res) => {
@@ -18,14 +19,11 @@ app.listen(PORT, () => {
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log('Connecté à MongoDB');
 }).catch(err => {
     console.error('Erreur de connexion à MongoDB:', err);
 });
 
 const userRoutes = require('./routes/userRoutes');
-app.use('/api/users', userRoutes);
+app.use('/users', userRoutes);
