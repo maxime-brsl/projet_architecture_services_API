@@ -1,12 +1,20 @@
 {
-  "name": "projet_architecture_services_api",
+  "name": "the_real_deal",
   "version": "1.0.0",
-  "description": "* Maxime Brasley\r * Julie Barthet",
+  "description": "Projet d'architecture des services API",
   "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "service-user"
+  ],
   "scripts": {
-    //TODO lancer les microservices
+    "install:all": "npm install",
+    "start:service-user": "npm --workspace=service-user start",
+    "start:all": "npm run -workspace=service-user start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "author": "* Maxime Brasley\n * Julie Barthet"
 }

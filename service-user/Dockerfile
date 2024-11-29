@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3001
 
 # Étape 7 : Commande pour lancer l'application
-CMD ["node", "index.js"]
+CMD ["node", "app.js"]

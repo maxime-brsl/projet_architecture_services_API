@@ -1,20 +1,15 @@
 {
   "name": "service-user",
+  "description": "Microservice de gestion des utilisateurs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "* Maxime Brasley\n * Julie Barthet",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.3",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.3"
   },
