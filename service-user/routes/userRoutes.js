@@ -8,13 +8,12 @@ const router = express.Router();
 // Route pour créer un compte utilisateur
 router.post('/register', async (req, res) => {
     try {
-        console.log(req.body);
         const { username, password, role } = req.body;
         const newUser = new User({ username, password, role });
         await newUser.save();
         res.status(201).json({ message: 'Utilisateur créé' });
     } catch (err) {
-        res.status(500).json({ error: err.message, console: req.body });
+        res.status(500).json({ error: err.message });
     }
 });
 
