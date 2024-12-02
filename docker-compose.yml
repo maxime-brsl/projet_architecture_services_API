@@ -1,13 +1,24 @@
 services:
 
+# gateway
+  gateway:
+    build:
+      context: gateway
+      dockerfile: ./Dockerfile
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - service-user
+
+
   # Microservice utilisateur
 
   service-user:
     build:
       context: service-user
       dockerfile: ./Dockerfile
-    ports:
-      - "3001:3001"
     environment:
       - MONGO_URI=mongodb://mongodb:27017/users_db
       - PORT=3001

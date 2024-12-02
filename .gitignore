@@ -6,7 +6,7 @@ yarn-error.log*        # Logs d'erreur générés par yarn
 
 # Logs
 logs/
-*.log                  # Fichiers de log (générés par votre app)
+*.log                  # Fichiers de log (générés par votre server)
 npm-debug.log*
 debug.log
 error.log

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['parieur', 'bookmaker'], default: 'parieur' },
@@ -9,11 +9,15 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Cryptage du mot de passe avant sauvegarde
-UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
+UserSchema.pre('save', async function() {
+    if (this.isModified('password')) {
+        try {
+            this.password = await bcrypt.hash(this.password, 10);
+        } catch (error) {
+            throw new Error('Erreur lors du cryptage du mot de passe');
+        }
+    }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default model('User', UserSchema);
 
