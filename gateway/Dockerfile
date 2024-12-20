@@ -4,11 +4,10 @@ FROM node:16
 # Définir le répertoire de travail dans le container (le dossier de la Gateway)
 WORKDIR /server
 
-# Copier le package.json et package-lock.json depuis la racine du projet
-COPY ../package*.json ./
+COPY package*.json ./
 
-# Installer les dépendances globales du projet
-RUN npm install --legacy-peer-deps
+# Installer les dépendances
+RUN npm install
 
 # Copier le code source spécifique à la Gateway dans le répertoire de travail
 COPY . .
