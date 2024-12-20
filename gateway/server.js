@@ -28,6 +28,6 @@ app.use((err, req, res, next) => {
 
 // Démarrer le serveur Gateway
 app.listen(PORT, () => {
-    console.log('Gateway en cours d\'exécution sur le port ' + PORT);
+    console.log(`Gateway lancée sur le port ${PORT}`);
 });
 

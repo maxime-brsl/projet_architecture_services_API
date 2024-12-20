@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // Lancer le serveur
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-    console.log(`Serveur User lancé sur le port ${PORT}`);
+    console.log(`Service User lancé sur le port ${PORT}`);
 });
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
