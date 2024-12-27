@@ -1,0 +1,51 @@
+<!-- register.component.html -->
+
+<div class="register-container">
+  <h2>Créer un compte</h2>
+
+  <form (ngSubmit)="onRegister()">
+    <!-- Champ pour le nom d'utilisateur -->
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input
+        id="username"
+        type="text"
+        class="form-control"
+        [(ngModel)]="username"
+        name="username"
+        required
+        placeholder="Entrez un nom d'utilisateur">
+    </div>
+
+    <!-- Champ pour le mot de passe -->
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input
+        id="password"
+        type="password"
+        class="form-control"
+        [(ngModel)]="password"
+        name="password"
+        required
+        placeholder="Entrez un mot de passe">
+    </div>
+
+    <!-- Champ pour le rôle -->
+    <div class="form-group">
+      <label for="role">Rôle</label>
+      <select
+        id="role"
+        class="form-control"
+        [(ngModel)]="role"
+        name="role"
+        required>
+        <option value="">Sélectionner un rôle</option>
+        <option value="parieur">Utilisateur</option>
+        <option value="bookmaker">Administrateur</option>
+      </select>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn btn-primary">Créer un compte</button>
+  </form>
+</div>
