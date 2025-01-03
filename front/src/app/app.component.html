@@ -1,7 +1,8 @@
 <nav>
-  <a routerLink="/login">Connexion</a>
-  <a routerLink="/register">Inscription</a>
-  <a routerLink="/me">Mon Compte</a>
+  <a *ngIf="!isAuthenticated()" routerLink="/login">Connexion</a>
+  <a *ngIf="!isAuthenticated()" routerLink="/register">Inscription</a>
+  <a *ngIf="isAuthenticated()" routerLink="/me">Mon Compte</a>
+  <a *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</a>
 </nav>
 
 <router-outlet></router-outlet>

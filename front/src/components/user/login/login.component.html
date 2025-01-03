@@ -1,47 +1,14 @@
-<!-- login.component.html -->
-
-<div class="login-container">
+<div>
   <h2>Connexion</h2>
-
-  <form (ngSubmit)="onLogin()">
-    <!-- Champ pour le nom d'utilisateur -->
-    <div class="form-group">
-      <label for="username">Nom d'utilisateur</label>
-      <input
-        id="username"
-        type="text"
-        class="form-control"
-        [(ngModel)]="username"
-        name="username"
-        required
-        placeholder="Entrez votre nom d'utilisateur">
-    </div>
-
-    <!-- Champ pour le mot de passe -->
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input
-        id="password"
-        type="password"
-        class="form-control"
-        [(ngModel)]="password"
-        name="password"
-        required
-        placeholder="Entrez votre mot de passe">
-    </div>
-
-    <!-- Affichage du message d'erreur -->
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-
-    <!-- Bouton de soumission désactivé pendant le chargement -->
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="isLoading">
-      <span *ngIf="isLoading">Chargement...</span>
-      <span *ngIf="!isLoading">Se connecter</span>
-    </button>
+  <form (ngSubmit)="login()">
+    <label>
+      Nom d'utilisateur :
+      <input [(ngModel)]="username" name="username" required />
+    </label>
+    <label>
+      Mot de passe :
+      <input [(ngModel)]="password" name="password" type="password" required />
+    </label>
+    <button type="submit">Se connecter</button>
   </form>
 </div>

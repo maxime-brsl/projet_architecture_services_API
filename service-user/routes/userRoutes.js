@@ -3,6 +3,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 
+//On a mit la secret key ici car c'était la seule valeur qui n'arrivait pas à être lu
+//Les autres nous avions bien la valeur qui s'affichait mais undefined pour secret key
+//On a donc décidé de la mettre ici
+const SECRET_KEY = "api_projet_pas_super_secure_le_secret_key_mais_bon";
+
 const router = express.Router();
 
 // Route pour créer un compte utilisateur
@@ -20,6 +25,7 @@ router.post('/register', async (req, res) => {
 // Route pour l’authentification
 router.post('/login', async (req, res) => {
     try {
+        console.log("SECRET_KEY", SECRET_KEY);
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
@@ -27,21 +33,27 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Mot de passe incorrect' });
 
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        // Inclure l'ID et le rôle dans le token JWT
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
+
         res.status(200).json({ token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
+
 // Route pour obtenir les informations utilisateur
 router.get('/me', async (req, res) => {
     try {
-        const token = req.headers['authorization'];
-        if (!token) return res.status(401).json({ message: 'Non autorisé' });
+        const { id } = req.user; // L'ID sera déjà décodé dans la Gateway
+        const user = await User.findById(id, '-password'); // Ne renvoyer pas le mot de passe
+        if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
 
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findById(decoded.id);
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json({ error: err.message });

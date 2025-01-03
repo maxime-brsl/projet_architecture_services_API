@@ -1,26 +1,33 @@
-import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import { AuthService } from '../services/auth-service/auth.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   imports: [
     RouterOutlet,
-    RouterLink
-  ]
+    RouterLink,
+    NgIf
+  ],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'The Real Deal';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
-    // Vérifiez si nous sommes dans un environnement de navigateur
-    if (isPlatformBrowser(this.platformId)) {
-      // Code qui accède à `document` ou autres objets spécifiques au navigateur
-      console.log('Running in the browser');
-    }
+  // Vérifie si l'utilisateur est authentifié
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
+
+  // Déconnexion de l'utilisateur
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirige vers la page de connexion après déconnexion
+  }
+
+  ngOnInit(): void {}
 }

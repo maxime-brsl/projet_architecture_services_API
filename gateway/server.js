@@ -1,7 +1,8 @@
 import express from 'express';
 import httpProxy from 'express-http-proxy';
 import dotenv from 'dotenv';
-import cors from 'cors'; // Importer le middleware CORS
+import cors from 'cors';
+import { verifyToken, authorizeRole } from './middleware/auth.js';
 
 dotenv.config();
 
@@ -9,24 +10,30 @@ const app = express();
 const PORT = process.env.PORT;
 const USER_SERVICE_URL = process.env.USER_SERVICE_URL;
 
-// Configuration des proxys
 const userServiceProxy = httpProxy(USER_SERVICE_URL);
 
-// Middleware pour activer CORS
 app.use(cors({
-    origin: 'http://localhost:4200',  // Frontend Angular
+    origin: 'http://localhost:4200',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Middleware pour parser les JSON et les URL-encoded
-app.use(express.json()); // Pour les requêtes JSON
-app.use(express.urlencoded({ extended: true })); // Pour les formulaires URL-encoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// Routes publiques
 app.post('/users/register', userServiceProxy);
 app.post('/users/login', userServiceProxy);
-app.get('/users/me', userServiceProxy);
+
+// Routes parieur
+app.get('/parieur/data', verifyToken, authorizeRole('parieur'), (req, res) => {
+    userServiceProxy(req, res);
+});
+
+// Routes bookmaker
+app.get('/bookmarker/data', verifyToken, authorizeRole('bookmarker'), (req, res) => {
+    userServiceProxy(req, res);
+});
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {
