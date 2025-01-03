@@ -25,6 +25,45 @@ services:
     depends_on:
       - mongodb
 
+
+  # Microservice cotes
+
+  service-odd:
+    build:
+      context: service-odd
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/odds_db
+      - PORT=3002
+    depends_on:
+      - mongodb
+
+
+  # Microservice paris
+
+  service-bet:
+    build:
+      context: service-bet
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/users_db
+      - PORT=3003
+    depends_on:
+      - mongodb
+
+  # Microservice paiements
+
+  service-payment:
+    build:
+      context: service-payment
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/payments_db
+      - PORT=3005
+    depends_on:
+      - mongodb
+
+
   # Gestion de la base de données
 
   mongodb:

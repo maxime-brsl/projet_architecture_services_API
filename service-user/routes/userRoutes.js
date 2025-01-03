@@ -46,7 +46,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
 // Route pour obtenir les informations utilisateur
 router.get('/me', async (req, res) => {
     try {
