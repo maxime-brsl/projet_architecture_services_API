@@ -12,7 +12,8 @@ export const verifyToken = (req, res, next) => {
     if (!token) return res.status(401).json({ message: 'Non autorisé' });
 
     try {
-        req.user = jwt.verify(token, SECRET_KEY); // Ajoute les données utilisateur au `req`
+        req.user = jwt.verify(token, SECRET_KEY);
+        req.headers['Authorization'] = token;
         next();
     } catch (err) {
         res.status(401).json({ message: 'Token invalide' });

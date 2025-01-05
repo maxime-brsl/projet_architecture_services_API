@@ -18,8 +18,9 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/login`, { username, password });
   }
 
-  getUserInfo(token: string): Observable<any> {
-    const headers = new HttpHeaders({ Authorization: token });
+  me(token: string): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', token);
     return this.http.get(`${this.baseUrl}/me`, { headers });
   }
 }

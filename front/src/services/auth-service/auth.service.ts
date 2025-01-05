@@ -14,11 +14,11 @@ export class AuthService {
   }
 
   // Récupère le token stocké, ou bien dans le service ou dans le localStorage
-  getToken(): string | null {
+  getToken(): string  {
     if (!this.token) {
       this.token = localStorage.getItem('authToken');
     }
-    return this.token;
+    return this.token?.toString() || '';
   }
 
   // Renvoie les en-têtes d'autorisation pour les requêtes HTTP

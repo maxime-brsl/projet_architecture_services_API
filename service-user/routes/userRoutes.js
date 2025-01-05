@@ -25,7 +25,6 @@ router.post('/register', async (req, res) => {
 // Route pour l’authentification
 router.post('/login', async (req, res) => {
     try {
-        console.log("SECRET_KEY", SECRET_KEY);
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
@@ -46,11 +45,13 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 // Route pour obtenir les informations utilisateur
 router.get('/me', async (req, res) => {
     try {
-        const { id } = req.user; // L'ID sera déjà décodé dans la Gateway
-        const user = await User.findById(id, '-password'); // Ne renvoyer pas le mot de passe
+        const userId = req.headers['x-user-id'];
+        const user = await User.findById(userId, "-password", null);
+        console.log("user", user);
         if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
 
         res.status(200).json(user);
