@@ -3,8 +3,8 @@ import Odd from '../models/Odd.js';
 
 const router = express.Router();
 
-// Créer ou mettre à jour une cote
-router.post('/', async (req, res) => {
+// Créer une cote (réservé aux bookmakers)
+router.post('/create', async (req, res) => {
     try {
         const { matchId, homeTeam, awayTeam, odds } = req.body;
         const updatedOdd = await Odd.findOneAndUpdate(
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 });
 
 // Obtenir toutes les cotes
-router.get('/', async (req, res) => {
+router.get('/list', async (req, res) => {
     try {
         const odds = await Odd.find();
         res.json(odds);
@@ -28,11 +28,27 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Supprimer une cote
-router.delete('/:id', async (req, res) => {
+
+// Modifier une cote (réservé aux bookmakers)
+router.patch('/update', async (req, res) => {
     try {
-        await Odd.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Cote supprimée' });
+        const { matchId, odds } = req.body;
+
+        if (!matchId || !odds) {
+            return res.status(400).json({ error: 'matchId et odds sont requis.' });
+        }
+
+        const updatedOdd = await Odd.findOneAndUpdate(
+            { matchId },
+            { odds, updatedAt: new Date() },
+            { new: true }
+        );
+
+        if (!updatedOdd) {
+            return res.status(404).json({ error: 'Cote non trouvée pour ce matchId.' });
+        }
+
+        res.json(updatedOdd);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

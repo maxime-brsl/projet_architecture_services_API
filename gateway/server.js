@@ -48,22 +48,20 @@ app.get('/matches/:competitionId', matchServiceProxy);
 app.get('/parieur/data', verifyToken, authorizeRole('parieur'), (req, res) => {
     userServiceProxy(req, res);
 });
+app.post('/bets/place', betServiceProxy);
+app.get('/bets/my-bets', betServiceProxy);
+app.post('/payments/pay', paymentServiceProxy);
+app.post('/payments/history', paymentServiceProxy);
+
 
 // Routes bookmaker
 app.get('/bookmarker/data', verifyToken, authorizeRole('bookmarker'), (req, res) => {
     userServiceProxy(req, res);
 });
+app.post('/odds/create', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
+app.patch('/odds/update', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
 
-app.post('/bets/place', betServiceProxy);
-app.get('/bets/my-bets', betServiceProxy);
 
-app.get('/odds', oddServiceProxy);
-app.post('/odds', authorizeRole('bookmarker'), oddServiceProxy); // Restriction aux bookmakers
-app.delete('/odds/:id', authorizeRole('bookmarker'), oddServiceProxy); // Restriction aux bookmakers
-
-app.get('/payments', paymentServiceProxy);
-app.post('/payments', paymentServiceProxy);
-app.delete('/payments/:id', paymentServiceProxy);
 
 // Gestion des erreurs
 app.use((err, req, res) => {
