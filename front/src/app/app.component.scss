@@ -1,28 +1,63 @@
 nav {
-  background-color: #333;
-  padding: 10px 20px;
+  background: linear-gradient(90deg, #e63946, #f77f00);
+  padding: 12px 24px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
-  margin: 0 15px;
+  margin: 0 20px;
   font-size: 16px;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 nav a:hover {
-  color: #ff6347;
-  transform: scale(1.1);
+  color: #f77f00;
+  transform: translateY(-2px);
 }
 
 nav a.router-link-active {
-  border-bottom: 2px solid #ff6347;
+  color: #ffd166;
+  border-bottom: 2px solid #ffd166;
+}
+
+nav .buttons {
+  display: flex;
+  gap: 12px;
+}
+
+nav .buttons .btn {
+  background: #e63946;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+nav .buttons .btn:hover {
+  background: #f77f00;
+  transform: scale(1.05);
+}
+
+nav .buttons .btn.secondary {
+  background: #f77f00;
+}
+
+nav .buttons .btn.secondary:hover {
+  background: #e63946;
 }

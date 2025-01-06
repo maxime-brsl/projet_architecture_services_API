@@ -5,14 +5,20 @@ div {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #e6f7ff; /* Bleu clair */
-  font-family: Arial, sans-serif;
+  background: linear-gradient(90deg, #e63946, #f77f00); /* Dégradé rouge-orange */
+  font-family: 'Arial', sans-serif;
+  color: #ffffff; /* Couleur par défaut pour le texte */
 }
 
 /* Titre */
 h2 {
-  color: #0073e6; /* Bleu foncé */
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Paragraphe */
@@ -20,13 +26,36 @@ p {
   font-size: 16px;
   color: #333;
   background-color: #ffffff;
-  padding: 10px 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.6;
 }
 
-/* Style des messages supplémentaires */
+/* Texte mis en valeur */
 p span {
   font-weight: bold;
-  color: #0073e6; /* Mettre en valeur */
+  color: #e63946; /* Accent rouge */
+}
+
+/* Bouton de retour */
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #e63946; /* Rouge pour le bouton */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #f77f00; /* Orange vif au survol */
+  transform: scale(1.05);
 }
