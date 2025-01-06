@@ -1,4 +1,3 @@
-/* Conteneur du formulaire */
 .register-container {
   max-width: 400px;
   margin: 50px auto;
@@ -9,18 +8,16 @@
   font-family: 'Arial', sans-serif;
 }
 
-/* Titre du formulaire */
 h2 {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: #e63946; /* Rouge dynamique */
+  color: #e63946;
   margin-bottom: 25px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* Styles généraux des champs de formulaire */
 .form-group {
   margin-bottom: 20px;
 }
@@ -31,6 +28,25 @@ label {
   color: #555;
   margin-bottom: 8px;
   font-weight: 600;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e63946;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #f77f00;
+  transform: scale(1.05);
 }
 
 input,
@@ -46,43 +62,6 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #f77f00; /* Orange au focus */
+  border-color: #f77f00;
   outline: none;
-}
-
-/* Style du bouton de soumission */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #e63946; /* Rouge pour le bouton */
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #f77f00; /* Orange vif au survol */
-  transform: scale(1.05);
-}
-
-/* Lien de connexion */
-.login-link {
-  display: block;
-  text-align: center;
-  margin-top: 15px;
-  color: #e63946;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.login-link:hover {
-  color: #f77f00; /* Orange vif au survol */
 }

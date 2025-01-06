@@ -22,42 +22,6 @@ nav a {
 }
 
 nav a:hover {
-  color: #f77f00;
+  color: #FFFFD0;
   transform: translateY(-2px);
-}
-
-nav a.router-link-active {
-  color: #ffd166;
-  border-bottom: 2px solid #ffd166;
-}
-
-nav .buttons {
-  display: flex;
-  gap: 12px;
-}
-
-nav .buttons .btn {
-  background: #e63946;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  border: none;
-  cursor: pointer;
-}
-
-nav .buttons .btn:hover {
-  background: #f77f00;
-  transform: scale(1.05);
-}
-
-nav .buttons .btn.secondary {
-  background: #f77f00;
-}
-
-nav .buttons .btn.secondary:hover {
-  background: #e63946;
 }

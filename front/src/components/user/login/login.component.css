@@ -1,16 +1,14 @@
-/* Centrage de la page */
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(90deg, #e63946, #f77f00); /* Dégradé rouge-orange pour le fond */
+  background: linear-gradient(90deg, #e63946, #f77f00);
   font-family: 'Arial', sans-serif;
-  color: #ffffff; /* Texte blanc par défaut */
+  color: #ffffff;
 }
 
-/* Titre */
 h2 {
   margin-bottom: 20px;
   font-size: 24px;
@@ -21,24 +19,22 @@ h2 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Formulaire */
 form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Aligner les champs au centre horizontalement */
-  justify-content: center; /* Centrer les champs verticalement */
+  align-items: center;
+  justify-content: center;
   width: 320px;
-  background-color: #ffffff; /* Fond blanc pour le formulaire */
+  background-color: #ffffff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  color: #333; /* Texte sombre pour le contraste */
+  color: #333;
 }
 
-/* Champs du formulaire */
 label {
   width: 100%;
-  text-align: left; /* Alignement du texte des labels */
+  text-align: left;
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 600;
@@ -53,18 +49,17 @@ input {
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.3s ease;
-  text-align: left; /* Alignement du texte dans le champ */
+  text-align: left;
 }
 
 input:focus {
-  border-color: #f77f00; /* Orange au focus */
+  border-color: #f77f00;
   outline: none;
 }
 
-/* Bouton de soumission */
 button {
   width: 100%;
-  background-color: #e63946; /* Rouge pour le bouton */
+  background-color: #e63946;
   color: #ffffff;
   padding: 12px;
   border: none;
@@ -77,34 +72,7 @@ button {
 }
 
 button:hover {
-  background-color: #f77f00; /* Orange vif au survol */
+  background-color: #f77f00;
   transform: scale(1.05);
 }
 
-/* Lien inscription / connexion */
-.links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 15px;
-}
-
-.links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.links a:hover {
-  color: #ffd166; /* Jaune orangé au survol */
-}
-
-/* Texte d'erreur */
-.error {
-  color: #e63946; /* Rouge vif pour les erreurs */
-  font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
