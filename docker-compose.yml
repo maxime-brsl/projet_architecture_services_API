@@ -63,6 +63,18 @@ services:
     depends_on:
       - mongodb
 
+  # Microservice matchs
+
+  service-match:
+      build:
+        context: service-match
+        dockerfile: ./Dockerfile
+      environment:
+        - MONGO_URI=mongodb://mongodb:27017/matches_db
+        - PORT=3004
+      depends_on:
+        - mongodb
+
 
   # Gestion de la base de données
 

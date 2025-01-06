@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { AuthService } from '../services/auth-service/auth.service';
 import {NgIf} from '@angular/common';
 
@@ -9,7 +9,8 @@ import {NgIf} from '@angular/common';
   imports: [
     RouterOutlet,
     RouterLink,
-    NgIf
+    NgIf,
+    RouterLinkActive
   ],
   styleUrls: ['./app.component.scss']
 })

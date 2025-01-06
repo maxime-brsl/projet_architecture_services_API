@@ -12,11 +12,13 @@ const USER_SERVICE_URL = process.env.USER_SERVICE_URL;
 const BET_SERVICE_URL = process.env.BET_SERVICE_URL;
 const ODD_SERVICE_URL = process.env.ODD_SERVICE_URL;
 const PAYMENT_SERVICE_URL = process.env.PAYMENT_SERVICE_URL;
+const MATCH_SERVICE_URL = process.env.MATCH_SERVICE_URL;
 
 const userServiceProxy = httpProxy(USER_SERVICE_URL);
 const betServiceProxy = httpProxy(BET_SERVICE_URL);
 const oddServiceProxy = httpProxy(ODD_SERVICE_URL);
 const paymentServiceProxy = httpProxy(PAYMENT_SERVICE_URL);
+const matchServiceProxy = httpProxy(MATCH_SERVICE_URL);
 
 app.use(cors({
     origin: 'http://localhost:4200',
@@ -39,6 +41,8 @@ app.get('/users/me', verifyToken, httpProxy(USER_SERVICE_URL, {
         },
     })
 );
+
+app.get('/matches/:competitionId', matchServiceProxy);
 
 // Routes parieur
 app.get('/parieur/data', verifyToken, authorizeRole('parieur'), (req, res) => {

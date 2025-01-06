@@ -1,0 +1,27 @@
+<div class="matches-container">
+  <h2>Matchs pour la compétition : {{ competitionId }}</h2>
+  <ng-container *ngFor="let match of matches">
+    <div class="match-card" *ngIf="match.status == 'TIMED'">
+      <div class="match-details">
+        <div class="team-info">
+          <!-- Affichage du crests de l'équipe à domicile -->
+          <img *ngIf="match.homeTeam.crest" [ngSrc]="match.homeTeam.crest" alt="{{ match.homeTeam.name }} flag" class="team-flag"
+               width="30" height="30"/>
+          <span>{{ match.homeTeam.name }}</span>
+
+          <span class="vs">vs</span>
+
+          <!-- Affichage du crests de l'équipe à l'extérieur -->
+          <span>{{ match.awayTeam.name }}</span>
+          <img *ngIf="match.awayTeam.crest" [ngSrc]="match.awayTeam.crest" alt="{{ match.awayTeam.name }} flag" class="team-flag"
+               width="30" height="30"/>
+
+        </div>
+        <div class="match-date">
+          <!-- Format de la date et de l'heure -->
+          {{ match.utcDate | date: 'dd/MM/yyyy' }} à {{ match.utcDate | date: 'HH:mm' }}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

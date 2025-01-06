@@ -3,6 +3,7 @@
   <a *ngIf="!isAuthenticated()" routerLink="/register">Inscription</a>
   <a *ngIf="isAuthenticated()" routerLink="/me">Mon Compte</a>
   <a *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</a>
+  <a routerLink="/competitions" routerLinkActive="active">Compétitions</a>
 </nav>
 
 <router-outlet></router-outlet>

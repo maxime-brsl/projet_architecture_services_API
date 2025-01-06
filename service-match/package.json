@@ -1,0 +1,17 @@
+{
+  "name": "service-match",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+
+  },
+  "keywords": [],
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "type": "module"
+}
