@@ -39,7 +39,8 @@ router.post('/login', async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        res.status(200).json({ token });
+        const userConnect = { token : token, role: user.role };
+        res.status(200).json(userConnect);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -51,7 +52,6 @@ router.get('/me', async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const user = await User.findById(userId, "-password", null);
-        console.log("user", user);
         if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
 
         res.status(200).json(user);

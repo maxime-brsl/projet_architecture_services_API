@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
   private token: string | null = null;
+  private role: string | null = null;
 
   // Stocke le token dans le service et le localStorage
   setToken(token: string): void {
@@ -21,11 +22,16 @@ export class AuthService {
     return this.token?.toString() || '';
   }
 
-  // Renvoie les en-têtes d'autorisation pour les requêtes HTTP
-  getAuthHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Authorization': this.getToken() || '',
-    });
+  setRole(role: string): void {
+    this.role = role;
+    localStorage.setItem('authRole', role);
+  }
+
+  getRole(): string | null {
+    if (!this.role) {
+      this.role = localStorage.getItem('authRole');
+    }
+    return this.role?.toString() || '';
   }
 
   // Vérifie si l'utilisateur est authentifié (si un token est présent)
@@ -36,6 +42,7 @@ export class AuthService {
   // Supprime le token pour déconnecter l'utilisateur
   logout(): void {
     this.token = null;
+    this.role = null;
     localStorage.removeItem('authToken');
   }
 }

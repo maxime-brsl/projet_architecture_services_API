@@ -6,28 +6,37 @@ const router = express.Router();
 // Créer une cote (réservé aux bookmakers)
 router.post('/create', async (req, res) => {
     try {
-        const { matchId, homeTeam, awayTeam, odds } = req.body;
+        const { matchId, odds } = req.body;
+        if (!matchId || !odds) {
+            return res.status(400).json({ error: 'matchId et odds sont requis.' });
+        }
+
+        const existingOdd = await Odd.findOne({ matchId });
+
+        let updatedOdds;
+        if (existingOdd) {
+            // Fusionner les nouvelles cotes avec les cotes existantes
+            updatedOdds = {
+                ...existingOdd.odds, // Les cotes existantes
+                ...odds,             // Les nouvelles cotes
+            };
+        } else {
+            updatedOdds = odds;
+        }
+
+        // Mettre à jour ou insérer la cote
         const updatedOdd = await Odd.findOneAndUpdate(
             { matchId },
-            { homeTeam, awayTeam, odds, updatedAt: new Date() },
-            { new: true, upsert: true }
+            { odds: updatedOdds },
+            { new: true, upsert: true }  // 'new: true' renvoie le document mis à jour
         );
-        res.status(201).json(updatedOdd);
+
+        // Retourner l'objet mis à jour avec les cotes
+        res.status(201).json(updatedOdd);  // Inclut les cotes dans la réponse
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
-
-// Obtenir toutes les cotes
-router.get('/list', async (req, res) => {
-    try {
-        const odds = await Odd.find();
-        res.json(odds);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 
 // Modifier une cote (réservé aux bookmakers)
 router.patch('/update', async (req, res) => {

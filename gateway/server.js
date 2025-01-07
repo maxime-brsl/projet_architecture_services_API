@@ -53,15 +53,9 @@ app.get('/bets/my-bets', betServiceProxy);
 app.post('/payments/pay', paymentServiceProxy);
 app.post('/payments/history', paymentServiceProxy);
 
-
 // Routes bookmaker
-app.get('/bookmarker/data', verifyToken, authorizeRole('bookmarker'), (req, res) => {
-    userServiceProxy(req, res);
-});
 app.post('/odds/create', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
 app.patch('/odds/update', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
-
-
 
 // Gestion des erreurs
 app.use((err, req, res) => {

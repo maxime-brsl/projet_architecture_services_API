@@ -6,16 +6,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-//faire un type match avec les champs suivants : id, homeTeam, awayTeam, date, status
-const matches = [
-    {
-        homeTeam: { name: 'Team A', crest: 'home_crest_url' },
-        awayTeam: { name: 'Team B', crest: 'away_crest_url' },
-        utcDate: '2025-01-07T15:00:00Z',
-        odds: null, // Initialement null, sera mis à jour via un service
-    },
-    // Autres matchs...
-];
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/matches/:competitionId', async (req, res) => {
     const { competitionId } = req.params;
