@@ -25,6 +25,7 @@ export class MatchListComponent implements OnInit {
     this.competitionId = this.route.snapshot.paramMap.get('competitionId');
     if (this.competitionId) {
       this.loadMatches(this.competitionId);
+      //TODO CHARGER LES COTES
     }
   }
 
@@ -34,18 +35,10 @@ export class MatchListComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.matches = response;
-          console.log(this.matches[10])
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des matches', err);
         },
       });
   }
-
-  isFuturMatch(match: any): boolean {
-    const now = new Date();
-    const matchDate = new Date(match.utcDate);
-    return matchDate > now;
-  }
-
 }

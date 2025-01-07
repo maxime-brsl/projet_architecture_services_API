@@ -1,15 +1,8 @@
 .matches-container {
-  padding: 30px;
-  background-color: #f4f7fc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2e3b4e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .match-card {
@@ -19,11 +12,8 @@ h2 {
   margin-bottom: 25px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.match-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  text-align: center;
 }
 
 .match-details {
@@ -32,51 +22,50 @@ h2 {
   align-items: center;
 }
 
+.match-date {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
 .team-info {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  width: 100%;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-align: center;
 }
 
 .team-flag {
-  width: 30px; /* Taille de l'image du crest */
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
 }
 
-.vs {
-  font-size: 18px;
-  font-weight: 600;
-  color: #555;
-  padding: 0 10px;
+.vs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0.5;
 }
 
-.match-date {
-  font-size: 16px;
-  color: #777;
-  font-weight: 500;
-  text-align: center;
-  padding-top: 10px;
+.odds-button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .matches-container {
-    padding: 15px;
-  }
-
-  .match-card {
-    padding: 15px;
-  }
-
-  .team-info {
-    flex-direction: column;
-  }
-
-  .vs {
-    margin-top: 5px;
-  }
+.odds-button:hover {
+  background-color: #0056b3;
 }

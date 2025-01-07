@@ -3,23 +3,26 @@
   <ng-container *ngFor="let match of matches">
     <div class="match-card" *ngIf="match.status == 'TIMED'">
       <div class="match-details">
-        <div class="team-info">
-          <!-- Affichage du crests de l'équipe à domicile -->
-          <img *ngIf="match.homeTeam.crest" [ngSrc]="match.homeTeam.crest" alt="{{ match.homeTeam.name }} flag" class="team-flag"
-               width="30" height="30"/>
-          <span>{{ match.homeTeam.name }}</span>
-
-          <span class="vs">vs</span>
-
-          <!-- Affichage du crests de l'équipe à l'extérieur -->
-          <span>{{ match.awayTeam.name }}</span>
-          <img *ngIf="match.awayTeam.crest" [ngSrc]="match.awayTeam.crest" alt="{{ match.awayTeam.name }} flag" class="team-flag"
-               width="30" height="30"/>
-
-        </div>
         <div class="match-date">
-          <!-- Format de la date et de l'heure -->
-          {{ match.utcDate | date: 'dd/MM/yyyy' }} à {{ match.utcDate | date: 'HH:mm' }}
+          {{ match.date | date: 'dd/MM/yyyy' }} à {{ match.date | date: 'HH:mm' }}
+        </div>
+        <div class="team-info">
+          <div class="team home-team">
+            <img *ngIf="match.homeTeam.crest" [ngSrc]="match.homeTeam.crest" alt="{{ match.homeTeam.name }} flag" class="team-flag" width="30" height="30" />
+            <span>{{ match.homeTeam.name }}</span>
+            <button class="odds-button">{{ match.odds?.home || '-' }}</button>
+          </div>
+
+          <div class="vs-section">
+            <span class="vs">vs</span>
+            <button class="odds-button">{{ match.odds?.draw || '-' }}</button>
+          </div>
+
+          <div class="team away-team">
+            <img *ngIf="match.awayTeam.crest" [ngSrc]="match.awayTeam.crest" alt="{{ match.awayTeam.name }} flag" class="team-flag" width="30" height="30" />
+            <span>{{ match.awayTeam.name }}</span>
+            <button class="odds-button">{{ match.odds?.away || '-' }}</button>
+          </div>
         </div>
       </div>
     </div>
