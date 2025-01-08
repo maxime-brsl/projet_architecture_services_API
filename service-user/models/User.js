@@ -5,7 +5,6 @@ const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['parieur', 'bookmaker'], default: 'parieur' },
-    wallet: { type: Number, default: 0 },
 });
 
 // Cryptage du mot de passe avant sauvegarde

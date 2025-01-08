@@ -4,7 +4,7 @@ div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 93.8%;
   background: linear-gradient(90deg, #e63946, #f77f00); /* Dégradé rouge-orange */
   font-family: 'Arial', sans-serif;
   color: #ffffff; /* Couleur par défaut pour le texte */

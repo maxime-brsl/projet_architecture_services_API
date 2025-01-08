@@ -1,4 +1,9 @@
-<div *ngIf="user">
-  <h2>Bienvenue, {{ user.username }}</h2>
+<div *ngIf="user; else noData">
+  <h2>{{ user.username }}</h2>
   <p>Rôle : {{ user.role }}</p>
+  <app-payment *ngIf="user.role == 'parieur'"></app-payment>
 </div>
+
+<ng-template #noData>
+  <p>Aucune donnée disponible</p>
+</ng-template>

@@ -17,7 +17,12 @@ const MATCH_SERVICE_URL = process.env.MATCH_SERVICE_URL;
 const userServiceProxy = httpProxy(USER_SERVICE_URL);
 const betServiceProxy = httpProxy(BET_SERVICE_URL);
 const oddServiceProxy = httpProxy(ODD_SERVICE_URL);
-const paymentServiceProxy = httpProxy(PAYMENT_SERVICE_URL);
+const paymentServiceProxy = httpProxy(PAYMENT_SERVICE_URL, {
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers['x-user-id'] = srcReq.user.id;
+        return proxyReqOpts;
+    },
+});
 const matchServiceProxy = httpProxy(MATCH_SERVICE_URL);
 
 app.use(cors({
@@ -45,12 +50,11 @@ app.get('/users/me', verifyToken, httpProxy(USER_SERVICE_URL, {
 app.get('/matches/:competitionId', matchServiceProxy);
 
 // Routes parieur
-app.get('/parieur/data', verifyToken, authorizeRole('parieur'), (req, res) => {
-    userServiceProxy(req, res);
-});
+app.post('/payments/pay', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
+app.get('/payments/wallet', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
+
 app.post('/bets/place', betServiceProxy);
 app.get('/bets/my-bets', betServiceProxy);
-app.post('/payments/pay', paymentServiceProxy);
 app.post('/payments/history', paymentServiceProxy);
 
 // Routes bookmaker

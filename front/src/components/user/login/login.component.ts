@@ -20,6 +20,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private http: HttpClient,
+    private router: Router,
   ) {}
 
   login(): void {
@@ -32,7 +33,7 @@ export class LoginComponent {
         next: (response) => {
           this.authService.setToken(response.token);
           this.authService.setRole(response.role);
-          alert('Connexion réussie');
+          this.router.navigate(['/competitions']).then(r => console.log('r', r));
         },
         error: (err) => {
           if (err.status === 400) {

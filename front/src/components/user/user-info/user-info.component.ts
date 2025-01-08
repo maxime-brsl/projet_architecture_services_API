@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth-service/auth.service';
 import {NgIf} from '@angular/common';
 import {UserService} from '../../../services/user-service/user.service';
+import {PaymentComponent} from '../../payment/payment.component';
 
 @Component({
   selector: 'app-user-info',
   imports: [
-    NgIf
+    NgIf,
+    PaymentComponent
   ],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css'
@@ -14,7 +16,9 @@ import {UserService} from '../../../services/user-service/user.service';
 export class UserInfoComponent implements OnInit {
   user: any;
 
-  constructor(private userService: UserService, private authService: AuthService) {}
+  constructor(private userService: UserService,
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     const token = this.authService.getToken();
