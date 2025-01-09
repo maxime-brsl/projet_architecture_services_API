@@ -34,6 +34,9 @@ export class PaymentComponent implements OnInit {
 
   async depositFunds() {
     let amount = await dialogText('Dépôt de fonds', 'Saisir le montant à déposer');
+    if (amount == null) {
+      return;
+    }
     if (Number(amount) >= 10) {
       this.paymentService.pay(this.token, Number(amount), 'deposit').subscribe({
         next: (response) => {
@@ -51,6 +54,9 @@ export class PaymentComponent implements OnInit {
 
   async withdrawalFunds() {
     let amount = await dialogText('Retrait de fonds', 'Saisir le montant à retirer');
+    if (amount == null) {
+      return;
+    }
     if (Number(amount) >= 10) {
       this.paymentService.pay(this.token, Number(amount), 'withdrawal').subscribe({
         next: (response) => {

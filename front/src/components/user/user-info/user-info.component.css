@@ -1,16 +1,14 @@
-/* Conteneur principal */
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 93.8%;
-  background: linear-gradient(90deg, #e63946, #f77f00); /* Dégradé rouge-orange */
+  background: linear-gradient(90deg, #e63946, #f77f00);
   font-family: 'Arial', sans-serif;
-  color: #ffffff; /* Couleur par défaut pour le texte */
+  color: #ffffff;
 }
 
-/* Titre */
 h2 {
   font-size: 24px;
   font-weight: bold;
@@ -21,7 +19,6 @@ h2 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Paragraphe */
 p {
   font-size: 16px;
   color: #333;
@@ -34,17 +31,15 @@ p {
   line-height: 1.6;
 }
 
-/* Texte mis en valeur */
 p span {
   font-weight: bold;
-  color: #e63946; /* Accent rouge */
+  color: #e63946;
 }
 
-/* Bouton de retour */
 button {
   margin-top: 20px;
   padding: 12px 20px;
-  background-color: #e63946; /* Rouge pour le bouton */
+  background-color: #e63946;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -56,6 +51,6 @@ button {
 }
 
 button:hover {
-  background-color: #f77f00; /* Orange vif au survol */
+  background-color: #f77f00;
   transform: scale(1.05);
 }
