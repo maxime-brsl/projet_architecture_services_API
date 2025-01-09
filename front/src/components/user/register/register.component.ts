@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../services/user-service/user.service';
 import {FormsModule} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +16,15 @@ export class RegisterComponent {
   password = '';
   role = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private router: Router) {
   }
 
   onRegister() {
     this.userService.register(this.username, this.password, this.role).subscribe(
       () => {
         alert('Utilisateur créé avec succès !');
+        this.router.navigate(['/login']).then();
       },
       (error: any) => {
         console.error(error);

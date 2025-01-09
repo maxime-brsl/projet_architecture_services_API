@@ -4,25 +4,8 @@ import Bet from '../models/Bet.js';
 
 const router = express.Router();
 
-// Middleware d'authentification corrigé
-const authenticate = (req, res, next) => {
-    try {
-        const header = req.headers['authorization']; // En minuscules
-        if (!header || !header.startsWith('Bearer ')) {
-            return res.status(401).json({ message: 'Non autorisé' });
-        }
-
-        const token = header.split(' ')[1]; // Extraire le token après 'Bearer'
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.user = decoded;
-        next();
-    } catch (err) {
-        res.status(401).json({ message: 'Token invalide' });
-    }
-};
-
 // Route pour placer un pari
-router.post('/place', authenticate, async (req, res) => {
+router.post('/place', async (req, res) => {
     try {
         const { matchId, type, stake, odds } = req.body;
 
@@ -38,7 +21,7 @@ router.post('/place', authenticate, async (req, res) => {
             type,
             stake,
             odds,
-            status: 'en attente',
+            status: 'waiting',
             winnings: 0
         });
 
@@ -49,15 +32,8 @@ router.post('/place', authenticate, async (req, res) => {
     }
 });
 
-/*
-// Route pour clôturer un pari
-router.post('/close', authenticate, async (req, res) => {
-});
-*/
-
-
 // Route pour récupérer les paris d'un utilisateur
-router.get('/my-bets', authenticate, async (req, res) => {
+router.get('/my-bets', async (req, res) => {
     try {
         const bets = await Bet.find({ userId: req.user.id });
         res.status(200).json(bets);
