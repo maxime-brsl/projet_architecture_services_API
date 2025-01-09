@@ -20,4 +20,9 @@ export class PaymentService {
     const headers = new HttpHeaders().set('Authorization', token);
     return this.http.post(`${this.baseUrl}/pay`, { amount, type }, { headers });
   }
+
+  history(token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get(`${this.baseUrl}/history`, { headers });
+  }
 }

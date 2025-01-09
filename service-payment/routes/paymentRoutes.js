@@ -20,7 +20,7 @@ router.post('/pay', async (req, res) => {
         if (type === 'withdrawal') {
             const balance = await calculateBalance(userId);
             if (balance < amount) {
-                return res.status(400).json({ error: 'Solde insuffisant pour effectuer ce retrait' });
+                return res.status(405).json({ error: 'Solde insuffisant pour effectuer ce retrait' });
             }
         }
         const payment = new Payment({ userId, amount, type });
@@ -42,11 +42,11 @@ router.get('/wallet', async (req, res) => {
 });
 
 // Obtenir l'historique des paiements d'un utilisateur
-router.post('/history', async (req, res) => {
+router.get('/history', async (req, res) => {
     try {
-        const { userId } = req.body;
+        const userId = req.headers['x-user-id'];
         if (!userId) {
-            return res.status(400).json({ error: 'userId est requis dans le body.' });
+            return res.status(400).json({ error: 'userId est requis' });
         }
         const payments = await Payment.find({ userId });
         res.json(payments);

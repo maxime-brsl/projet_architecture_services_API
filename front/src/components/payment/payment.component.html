@@ -4,3 +4,23 @@
   <button (click)="depositFunds()">Dépot</button>
   <button (click)="withdrawalFunds()">Retrait</button>
 </div>
+
+<div class="history-of-transaction">
+  <h2>Historique des transactions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Montant</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of history">
+        <td>{{ transaction.type == 'deposit' ? 'Dépôt' : 'Retrait' }}</td>
+        <td>{{ transaction.amount }} €</td>
+        <td>{{ transaction.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

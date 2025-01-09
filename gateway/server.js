@@ -52,10 +52,10 @@ app.get('/odds/:matchId', oddServiceProxy);
 // Routes parieur
 app.post('/payments/pay', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
 app.get('/payments/wallet', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
+app.get('/payments/history', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
 
 app.post('/bets/place', betServiceProxy);
 app.get('/bets/my-bets', betServiceProxy);
-app.post('/payments/history', paymentServiceProxy);
 
 // Routes bookmaker
 app.post('/odds/create', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
