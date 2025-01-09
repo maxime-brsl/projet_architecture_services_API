@@ -33,7 +33,7 @@ export class LoginComponent {
         next: (response) => {
           this.authService.setToken(response.token);
           this.authService.setRole(response.role);
-          this.router.navigate(['/competitions']).then(r => console.log('r', r));
+          this.router.navigate(['/competitions']).then();
         },
         error: (err) => {
           if (err.status === 400) {

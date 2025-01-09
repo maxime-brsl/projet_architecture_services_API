@@ -82,29 +82,4 @@ router.get('/:matchId', async (req, res) => {
     }
 });
 
-// Modifier une cote (réservé aux bookmakers)
-router.patch('/update', async (req, res) => {
-    try {
-        const { matchId, odds } = req.body;
-
-        if (!matchId || !odds) {
-            return res.status(400).json({ error: 'matchId et odds sont requis.' });
-        }
-
-        const updatedOdd = await Odd.findOneAndUpdate(
-            { matchId },
-            { odds, updatedAt: new Date() },
-            { new: true }
-        );
-
-        if (!updatedOdd) {
-            return res.status(404).json({ error: 'Cote non trouvée pour ce matchId.' });
-        }
-
-        res.json(updatedOdd);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 export default router;

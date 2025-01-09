@@ -10,18 +10,18 @@
           <div class="team home-team">
             <img *ngIf="match.homeTeam.crest" [ngSrc]="match.homeTeam.crest" alt="{{ match.homeTeam.name }} flag" class="team-flag" width="30" height="30" />
             <span>{{ match.homeTeam.name }}</span>
-            <button class="odds-button" (click)="handleOddsClick(match.id, 'homeTeam', !!match.odds?.homeTeam)">{{ match.odds?.homeTeam || '-' }}</button>
+            <button class="odds-button" (click)="handleOddsClick(match.id, 'homeTeam')">{{ match.odds?.homeTeam || '-' }}</button>
           </div>
 
-          <div class="vs-section">
-            <span class="vs">vs</span>
-            <button class="odds-button" (click)="handleOddsClick(match.id, 'draw', !!match.odds?.draw)">{{ match.odds?.draw || '-' }}</button>
+          <div class=null-section>
+            <span class="null">Égalité</span>
+            <button class="odds-button" (click)="handleOddsClick(match.id, 'draw')">{{ match.odds?.draw || '-' }}</button>
           </div>
 
           <div class="team away-team">
             <img *ngIf="match.awayTeam.crest" [ngSrc]="match.awayTeam.crest" alt="{{ match.awayTeam.name }} flag" class="team-flag" width="30" height="30" />
             <span>{{ match.awayTeam.name }}</span>
-            <button class="odds-button" (click)="handleOddsClick(match.id, 'awayTeam', match.odds?.awayTeam)">{{ match.odds?.awayTeam || '-' }}</button>
+            <button class="odds-button" (click)="handleOddsClick(match.id, 'awayTeam')">{{ match.odds?.awayTeam || '-' }}</button>
           </div>
         </div>
       </div>

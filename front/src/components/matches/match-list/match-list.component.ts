@@ -44,7 +44,6 @@ export class MatchListComponent implements OnInit {
               }
             });
           }
-          console.log(this.matches);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des matches', err);
@@ -53,8 +52,8 @@ export class MatchListComponent implements OnInit {
     }
   }
 
-  handleOddsClick(matchId: number, outcome: string, haveOdd: boolean): void {
-    if (this.authService.getRole()?.toLowerCase() === 'bookmaker' && !haveOdd) {
+  handleOddsClick(matchId: number, outcome: string): void {
+    if (this.authService.getRole()?.toLowerCase() === 'bookmaker') {
       dialogText('Ajouter une cote', 'Veuillez saisir la cote à ajouter').then((odd) => {
         if (odd == null) {
           return;
@@ -80,7 +79,7 @@ export class MatchListComponent implements OnInit {
         });
       });
     } else {
-      console.log('Action pour parieur non encore implémentée');
+
     }
   }
 }
