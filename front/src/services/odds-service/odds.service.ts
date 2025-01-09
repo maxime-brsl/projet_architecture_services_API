@@ -12,18 +12,18 @@ export class OddsService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-   addOdd(matchId: number, outcome: string): Observable<any> {
-    //TODO Ajouter la cote pour le match
-    //afficher une popup pour saisir la cote et la valider
-    //faire appel au service Odd pour enregistrer la cote
+   addOdd(matchId: number, outcome: string, odd: number): Observable<any> {
      let headers = new HttpHeaders();
      headers = headers.set('Authorization', this.authService.getToken());
      const requestBody = {
-       matchId,
-       odds: {
-         [outcome]: 3.21
-       }
+       matchId: matchId,
+       outcome: outcome,
+       odd: odd
      };
      return this.http.post(`${this.baseUrl}/create`, requestBody, { headers });
+  }
+
+  getOdd(matchId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${matchId}`);
   }
 }

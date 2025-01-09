@@ -1,7 +1,7 @@
 <div class="matches-container">
   <h2>Matchs de la compétition : {{ competitionId == 'CL' ? 'Champions league' : 'Premier league' }}</h2>
   <ng-container *ngFor="let match of matches">
-    <div class="match-card" *ngIf="match.status == 'TIMED'">
+    <div class="match-card">
       <div class="match-details">
         <div class="match-date">
           {{ match.date | date: 'dd/MM/yyyy' }} à {{ match.date | date: 'HH:mm' }}
@@ -10,7 +10,7 @@
           <div class="team home-team">
             <img *ngIf="match.homeTeam.crest" [ngSrc]="match.homeTeam.crest" alt="{{ match.homeTeam.name }} flag" class="team-flag" width="30" height="30" />
             <span>{{ match.homeTeam.name }}</span>
-            <button class="odds-button" (click)="handleOddsClick(match.id, 'home', !!match.odds?.home )">{{ match.odds?.home || '-' }}</button>
+            <button class="odds-button" (click)="handleOddsClick(match.id, 'homeTeam', !!match.odds?.homeTeam)">{{ match.odds?.homeTeam || '-' }}</button>
           </div>
 
           <div class="vs-section">
@@ -21,7 +21,7 @@
           <div class="team away-team">
             <img *ngIf="match.awayTeam.crest" [ngSrc]="match.awayTeam.crest" alt="{{ match.awayTeam.name }} flag" class="team-flag" width="30" height="30" />
             <span>{{ match.awayTeam.name }}</span>
-            <button class="odds-button" (click)="handleOddsClick(match.id, 'away', match.odds?.away)">{{ match.odds?.away || '-' }}</button>
+            <button class="odds-button" (click)="handleOddsClick(match.id, 'awayTeam', match.odds?.awayTeam)">{{ match.odds?.awayTeam || '-' }}</button>
           </div>
         </div>
       </div>

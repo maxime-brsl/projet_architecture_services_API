@@ -46,8 +46,8 @@ app.get('/users/me', verifyToken, httpProxy(USER_SERVICE_URL, {
         },
     })
 );
-
 app.get('/matches/:competitionId', matchServiceProxy);
+app.get('/odds/:matchId', oddServiceProxy);
 
 // Routes parieur
 app.post('/payments/pay', verifyToken, authorizeRole('parieur'), paymentServiceProxy);

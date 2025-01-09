@@ -3,9 +3,9 @@ import { Schema, model } from 'mongoose';
 const OddSchema = new Schema({
     matchId: { type: String, required: true, unique: true },
     odds: {
-        homeWin: { type: Number, required: true },
+        homeTeam: { type: Number, required: true },
         draw: { type: Number, required: true },
-        awayWin: { type: Number, required: true }
+        awayTeam: { type: Number, required: true }
     },
 });
 

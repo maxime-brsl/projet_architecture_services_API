@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {OddsService} from '../../../services/odds-service/odds.service';
 import {AuthService} from '../../../services/auth-service/auth.service';
+import {dialogText} from '../../../util/popupTextInput';
+import {MatchService} from '../../../services/match-service/match.service';
 
 @Component({
   selector: 'app-match-list',
@@ -20,46 +22,62 @@ export class MatchListComponent implements OnInit {
   competitionId: string | null = null;
   matches: any[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private authService: AuthService, private oddService: OddsService) {
+  constructor(private route: ActivatedRoute,
+              private authService: AuthService,
+              private oddService: OddsService,
+              private matchService: MatchService) {
   }
 
   ngOnInit() {
     this.competitionId = this.route.snapshot.paramMap.get('competitionId');
     if (this.competitionId) {
-      this.loadMatches(this.competitionId);
-      //TODO CHARGER LES COTES
-    }
-  }
-
-  loadMatches(competitionId: string) {
-    this.http
-      .get(`http://localhost:3000/matches/${competitionId}`)
-      .subscribe({
+      this.matchService.loadMatches(this.competitionId).subscribe({
         next: (response: any) => {
-          this.matches = response;
+          this.matches = response.filter((match: any) => match.status === "TIMED");
+          for (const match of this.matches) {
+            this.oddService.getOdd(match.id).subscribe({
+              next: (response) => {
+                match.odds = response.odds;
+              },
+              error: (err) => {
+                console.error('Erreur lors de la récupération des cotes', err);
+              }
+            });
+          }
+          console.log(this.matches);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des matches', err);
-        },
+        }
       });
+    }
   }
 
   handleOddsClick(matchId: number, outcome: string, haveOdd: boolean): void {
     if (this.authService.getRole()?.toLowerCase() === 'bookmaker' && !haveOdd) {
-      // Ajouter une cote via le service
-      this.oddService.addOdd(matchId, outcome).subscribe({
-        next: (response) => {
-          console.log('Cote ajoutée avec succès', response);
-
-          // Mettre à jour localement les données du match
-          const matchIndex = this.matches.findIndex((match) => match.id === matchId);
-          if (matchIndex !== -1) {
-            this.matches[matchIndex].odds = response.odds; // Mise à jour avec les nouvelles cotes
+      dialogText('Ajouter une cote', 'Veuillez saisir la cote à ajouter').then((odd) => {
+        if (odd == null) {
+          return;
+        }
+        if (Number(odd) <= 1) {
+          alert('La cote doit être supérieure à 1');
+          return;
+        }
+        if (Number(odd) >= 100) {
+          alert('La cote doit être inférieure à 100');
+          return;
+        }
+        this.oddService.addOdd(matchId, outcome, odd).subscribe({
+          next: (response) => {
+            const matchIndex = this.matches.findIndex((match) => match.id === matchId);
+            if (matchIndex !== -1) {
+              this.matches[matchIndex].odds = response.odds;
+            }
+          },
+          error: (err) => {
+            console.error('Erreur lors de l\'ajout de la cote', err);
           }
-        },
-        error: (err) => {
-          console.error('Erreur lors de l’ajout de la cote', err);
-        },
+        });
       });
     } else {
       console.log('Action pour parieur non encore implémentée');

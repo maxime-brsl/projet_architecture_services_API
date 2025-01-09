@@ -39,8 +39,7 @@ export class PaymentComponent implements OnInit {
     }
     if (Number(amount) >= 10) {
       this.paymentService.pay(this.token, Number(amount), 'deposit').subscribe({
-        next: (response) => {
-          console.log('Dépôt réussi :', response);
+        next: () => {
           this.updateWallet();
         },
         error: (err) => {
@@ -59,8 +58,7 @@ export class PaymentComponent implements OnInit {
     }
     if (Number(amount) >= 10) {
       this.paymentService.pay(this.token, Number(amount), 'withdrawal').subscribe({
-        next: (response) => {
-          console.log('Retrait réussi :', response);
+        next: () => {
           this.updateWallet();
         },
         error: (err) => {
