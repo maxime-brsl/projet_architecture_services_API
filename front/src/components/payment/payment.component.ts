@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth-service/auth.service';
 import {PaymentService} from '../../services/payment-service/payment.service';
 import {dialogText} from '../../util/popupTextInput';
 import {CommonModule, DatePipe} from '@angular/common';

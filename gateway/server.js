@@ -52,6 +52,7 @@ app.get('/users/me', verifyToken, httpProxy(USER_SERVICE_URL, {
     })
 );
 app.get('/matches/:competitionId', matchServiceProxy);
+app.get('/matches/match/:matchId', matchServiceProxy);
 app.get('/odds/:matchId', oddServiceProxy);
 
 // Routes parieur

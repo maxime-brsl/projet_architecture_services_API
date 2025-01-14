@@ -5,11 +5,22 @@
   </div>
   <div *ngFor="let bet of bets" class="bet-card">
     <div class="bet-details">
-      <p>Match ID: {{ bet.matchId }}</p>
-      <p>Résultat: {{ bet.outcome }}</p>
-      <p>Type: {{ bet.type }}</p>
-      <p>Mise: {{ bet.stake }}</p>
+      <div class="match-info">
+        <div class="team home-team">
+          <img *ngIf="bet.match.homeTeam.crest" [src]="bet.match.homeTeam.crest" alt="{{ bet.match.homeTeam.name }} flag" class="team-flag" width="30" height="30" />
+          <span>{{ bet.match.homeTeam.name }}</span>
+        </div>
+        <span class="vs">vs</span>
+        <div class="team away-team">
+          <span>{{ bet.match.awayTeam.name }}</span>
+          <img *ngIf="bet.match.awayTeam.crest" [src]="bet.match.awayTeam.crest" alt="{{ bet.match.awayTeam.name }} flag" class="team-flag" width="30" height="30" />
+        </div>
+      </div>
+      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.match.homeTeam.name : bet.match.awayTeam.name }}</p>
+      <p>Mise: {{ bet.stake }} €</p>
       <p>Cote: {{ bet.odd }}</p>
+      <p>Gain potentiel : {{ bet.odd * bet.stake }} €</p>
+      <p>Type de pari: {{ bet.type }}</p>
       <p>Statut: {{ bet.status }}</p>
       <p>Créé le: {{ bet.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
     </div>

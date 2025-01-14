@@ -16,4 +16,17 @@ const getMatches = async (competitionId) => {
     }
 };
 
-export { getMatches };
+const getMatch = async (matchId) => {
+    try {
+        console.log(`${baseUrl}/matches/${matchId}`);
+        const response = await axios.get(`${baseUrl}/matches/${matchId}`, {
+            headers: { 'X-Auth-Token': apiKey },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erreur lors de la récupération du match :', error.message);
+        throw error;
+    }
+}
+
+export { getMatches, getMatch };

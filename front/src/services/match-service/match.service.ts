@@ -12,4 +12,8 @@ export class MatchService {
   loadMatches(competitionId: string) {
     return this.http.get(`${this.baseUrl}/${competitionId}`);
   }
+
+  getMatch(matchId: number) {
+    return this.http.get(`${this.baseUrl}/match/${matchId}`);
+  }
 }

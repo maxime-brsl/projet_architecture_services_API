@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let transaction of history">
-        <td>{{ transaction.type == 'deposit' ? 'Dépôt' : 'Retrait' }}</td>
+        <td>{{ transaction.type }}</td>
         <td>{{ transaction.amount }} €</td>
         <td>{{ transaction.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
       </tr>

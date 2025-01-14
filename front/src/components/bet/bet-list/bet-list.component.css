@@ -1,0 +1,78 @@
+.my-bets-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.bet-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 500px;
+  text-align: center;
+}
+
+.bet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bet-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bet-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.bet-details p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.bet-details p:last-child {
+  font-size: 14px;
+  color: #555;
+}
+
+.match-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
+
+.home-team {
+  justify-content: flex-start;
+}
+
+.away-team {
+  justify-content: flex-end;
+}
+
+.team-flag {
+  margin: 0 5px;
+}
+
+.vs {
+  margin: 0 10px;
+  font-size: 14px;
+  color: #555;
+}
