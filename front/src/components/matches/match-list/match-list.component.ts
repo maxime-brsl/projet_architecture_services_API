@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
-import {OddsService} from '../../../services/odds-service/odds.service';
-import {AuthService} from '../../../services/auth-service/auth.service';
-import {dialogText} from '../../../util/popupTextInput';
-import {MatchService} from '../../../services/match-service/match.service';
-import {BetService} from '../../../services/bet-service/bet.service';
-import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
-import {CartComponent} from '../../bet/bet-cart/bet-cart.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DatePipe, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
+import { OddsService } from '../../../services/odds-service/odds.service';
+import { AuthService } from '../../../services/auth-service/auth.service';
+import { dialogText } from '../../../util/popupTextInput';
+import { MatchService } from '../../../services/match-service/match.service';
+import { BetService } from '../../../services/bet-service/bet.service';
+import { CartService } from '../../../services/bet-cart-service/bet-cart.service';
+import { CartComponent } from '../../bet/bet-cart/bet-cart.component';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -25,6 +25,9 @@ import { firstValueFrom } from 'rxjs';
 export class MatchListComponent implements OnInit {
   competitionId: string | null = null;
   matches: any[] = [];
+  paginatedMatches: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 3;
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -49,11 +52,32 @@ export class MatchListComponent implements OnInit {
               }
             });
           }
+          this.updatePaginatedMatches();
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des matches', err);
         }
       });
+    }
+  }
+
+  updatePaginatedMatches() {
+    const startItem = (this.currentPage - 1) * this.itemsPerPage;
+    const endItem = startItem + this.itemsPerPage;
+    this.paginatedMatches = this.matches.slice(startItem, endItem);
+  }
+
+  nextPage() {
+    if ((this.currentPage * this.itemsPerPage) < this.matches.length) {
+      this.currentPage++;
+      this.updatePaginatedMatches();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedMatches();
     }
   }
 
@@ -65,10 +89,6 @@ export class MatchListComponent implements OnInit {
         }
         if (Number(odd) <= 1) {
           alert('La cote doit être supérieure à 1');
-          return;
-        }
-        if (Number(odd) >= 100) {
-          alert('La cote doit être inférieure à 100');
           return;
         }
         this.oddService.addOdd(matchId, outcome, odd).subscribe({

@@ -14,8 +14,8 @@ router.post('/create', async (req, res) => {
         }
 
         // Vérification des limites de la cote
-        if (odd < 1 || odd >= 100) {
-            return res.status(400).json({ error: 'La cote doit être comprise entre 1 et 100 (exclu).' });
+        if (odd < 1 ) {
+            return res.status(400).json({ error: 'La cote doit être supérieur à 1.' });
         }
 
         // Vérifie si le match existe

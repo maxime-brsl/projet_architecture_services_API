@@ -1,6 +1,6 @@
 <div class="matches-container">
   <h2>Matchs de la compétition : {{ competitionId == 'CL' ? 'Champions league' : 'Premier league' }}</h2>
-  <ng-container *ngFor="let match of matches">
+  <ng-container *ngFor="let match of paginatedMatches">
     <div class="match-card">
       <div class="match-details">
         <div class="match-date">
@@ -27,5 +27,11 @@
       </div>
     </div>
   </ng-container>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="(currentPage * itemsPerPage) >= matches.length">Suivant</button>
+  </div>
 </div>
 <app-cart></app-cart>
