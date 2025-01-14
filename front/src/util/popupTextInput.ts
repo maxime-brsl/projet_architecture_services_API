@@ -12,6 +12,7 @@ export function dialogText(titre: string, placeholder: string): Promise<number |
     popup.style.borderRadius = '10px';
     popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
     popup.style.zIndex = '1000';
+    popup.style.width = 'fit-content';
 
     // Ajoute le titre
     const titreElement = document.createElement('h2');

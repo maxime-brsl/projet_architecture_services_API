@@ -15,7 +15,12 @@ const PAYMENT_SERVICE_URL = process.env.PAYMENT_SERVICE_URL;
 const MATCH_SERVICE_URL = process.env.MATCH_SERVICE_URL;
 
 const userServiceProxy = httpProxy(USER_SERVICE_URL);
-const betServiceProxy = httpProxy(BET_SERVICE_URL);
+const betServiceProxy = httpProxy(BET_SERVICE_URL, {
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers['x-user-id'] = srcReq.user.id;
+        return proxyReqOpts;
+    },
+});
 const oddServiceProxy = httpProxy(ODD_SERVICE_URL);
 const paymentServiceProxy = httpProxy(PAYMENT_SERVICE_URL, {
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
@@ -53,13 +58,11 @@ app.get('/odds/:matchId', oddServiceProxy);
 app.post('/payments/pay', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
 app.get('/payments/wallet', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
 app.get('/payments/history', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
-
-app.post('/bets/place', betServiceProxy);
-app.get('/bets/my-bets', betServiceProxy);
+app.post('/bets/place', verifyToken, authorizeRole('parieur'), betServiceProxy);
+app.get('/bets/my-bets', verifyToken, authorizeRole('parieur'), betServiceProxy);
 
 // Routes bookmaker
 app.post('/odds/create', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
-app.patch('/odds/update', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);
 
 // Gestion des erreurs
 app.use((err, req, res) => {

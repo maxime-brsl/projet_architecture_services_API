@@ -5,7 +5,7 @@ export const calculateBalance = async (userId) => {
     return payments.reduce((acc, payment) => {
         if (payment.type === 'deposit' || payment.type === 'win_payment') {
             return acc + payment.amount;
-        } else if (payment.type === 'withdrawal') {
+        } else if (payment.type === 'withdrawal' || payment.type === 'bet') {
             return acc - payment.amount;
         }
         return acc;

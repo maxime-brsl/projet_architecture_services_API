@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {OddsService} from '../../../services/odds-service/odds.service';
 import {AuthService} from '../../../services/auth-service/auth.service';
 import {dialogText} from '../../../util/popupTextInput';
 import {MatchService} from '../../../services/match-service/match.service';
+import {BetService} from '../../../services/bet-service/bet.service';
+import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
+import {CartComponent} from '../../bet/bet-cart/bet-cart.component';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-match-list',
@@ -15,7 +18,8 @@ import {MatchService} from '../../../services/match-service/match.service';
     NgForOf,
     NgIf,
     DatePipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    CartComponent
   ]
 })
 export class MatchListComponent implements OnInit {
@@ -25,7 +29,8 @@ export class MatchListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
               private oddService: OddsService,
-              private matchService: MatchService) {
+              private matchService: MatchService,
+              private cartService: CartService) {
   }
 
   ngOnInit() {
@@ -52,9 +57,9 @@ export class MatchListComponent implements OnInit {
     }
   }
 
-  handleOddsClick(matchId: number, outcome: string): void {
+  async handleOddsClick(matchId: number, outcome: string): Promise<void> {
     if (this.authService.getRole()?.toLowerCase() === 'bookmaker') {
-      dialogText('Ajouter une cote', 'Veuillez saisir la cote à ajouter').then((odd) => {
+      dialogText('Ajouter une cote', 'Saisir ube cote').then((odd) => {
         if (odd == null) {
           return;
         }
@@ -78,8 +83,35 @@ export class MatchListComponent implements OnInit {
           }
         });
       });
-    } else {
-
+    } else if (this.authService.getRole()?.toLowerCase() === 'parieur') {
+      try {
+        const oddsResponse = await firstValueFrom(this.oddService.getOdd(matchId));
+        if (oddsResponse.odds[outcome] !== undefined) {
+          dialogText('Ajouter une mise', 'Saisir une mise').then((stake) => {
+            if (stake == null) {
+              return;
+            }
+            if (Number(stake) < 0.1) {
+              alert('Le paris doit être supérieure à 0.10 €');
+              return;
+            }
+            const bet = {
+              matchId,
+              type: 'simple',
+              outcome,
+              stake: Number(stake),
+              odd: oddsResponse.odds[outcome]
+            };
+            this.cartService.addBet(bet);
+            this.cartService.showCart();
+          });
+        }
+      } catch (err: any) {
+        if (err.status === 405) {
+          alert('Vous n\navez pas assez de crédit pour placer ce pari');
+        }
+        console.error('Erreur lors de la récupération des cotes', err);
+      }
     }
   }
 }

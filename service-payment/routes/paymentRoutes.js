@@ -9,11 +9,12 @@ router.post('/pay', async (req, res) => {
     try {
         const userId = req.headers['x-user-id'];
         const { amount, type } = req.body;
-        if (!['deposit', 'withdrawal'].includes(type)) {
+
+        if (!['deposit', 'withdrawal', 'bet'].includes(type)) {
             return res.status(400).json({ error: 'Type invalide, doit être deposit (dépôt) ou withdrawal (retrait)' });
         }
 
-        if (amount < 10) {
+        if (amount < 10 && type !== 'bet') {
             return res.status(400).json({ error: 'Le montant doit être supérieur ou égal à 10€' });
         }
         // Vérification du solde pour un retrait

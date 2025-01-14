@@ -1,0 +1,22 @@
+<div class="cart" *ngIf="isVisible">
+  <h2>Votre panier</h2>
+  <div *ngIf="bets.length === 0">
+    <p>Votre panier est vide.</p>
+  </div>
+  <div *ngIf="bets.length > 0">
+    <div class="bet" *ngFor="let bet of bets">
+      <p>Match: {{ bet.matchId }}</p>
+      <p>Type: {{ bet.outcome }}</p>
+      <p>Mise: {{ bet.stake }}</p>
+      <p>Cote: {{ bet.odd }}</p>
+    </div>
+    <div class="bet-type-switch">
+      <label>
+        <input type="checkbox" [(ngModel)]="isCombined" (change)="toggleBetType()">
+        Combiné
+      </label>
+    </div>
+    <button (click)="clearBets()">Supprimer les paris</button>
+    <button (click)="placeBet()">Valider les paris</button>
+  </div>
+</div>

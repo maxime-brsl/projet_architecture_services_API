@@ -16,20 +16,18 @@ import {CommonModule, DatePipe} from '@angular/common';
 
 export class PaymentComponent implements OnInit {
   wallet = null;
-  token: string = '';
   history : Transaction[] = [];
 
-  constructor(private authService: AuthService, private paymentService: PaymentService) {
+  constructor(private paymentService: PaymentService) {
   }
 
   ngOnInit(): void {
-    this.token = this.authService.getToken();
     this.updateWallet();
     this.getHistory();
   }
 
   updateWallet() {
-    this.paymentService.getWallet(this.token).subscribe({
+    this.paymentService.getWallet().subscribe({
       next: (response) => {
         this.wallet = response.wallet;
       },
@@ -45,7 +43,7 @@ export class PaymentComponent implements OnInit {
       return;
     }
     if (Number(amount) >= 10) {
-      this.paymentService.pay(this.token, Number(amount), 'deposit').subscribe({
+      this.paymentService.pay(Number(amount), 'deposit').subscribe({
         next: () => {
           this.updateWallet();
           this.getHistory();
@@ -65,7 +63,7 @@ export class PaymentComponent implements OnInit {
       return;
     }
     if (Number(amount) >= 10) {
-      this.paymentService.pay(this.token, Number(amount), 'withdrawal').subscribe({
+      this.paymentService.pay(Number(amount), 'withdrawal').subscribe({
         next: () => {
           this.updateWallet();
           this.getHistory();
@@ -83,7 +81,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getHistory() {
-    this.paymentService.history(this.token).subscribe({
+    this.paymentService.history().subscribe({
       next: (response) => {
         this.history = response;
         this.history.sort((a, b) => {

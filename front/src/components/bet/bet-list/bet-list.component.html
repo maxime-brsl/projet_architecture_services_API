@@ -1,0 +1,17 @@
+<div class="my-bets-container">
+  <h2>Mes paris en cours</h2>
+  <div *ngIf="bets.length === 0">
+    <p>Vous n'avez pas de paris en cours.</p>
+  </div>
+  <div *ngFor="let bet of bets" class="bet-card">
+    <div class="bet-details">
+      <p>Match ID: {{ bet.matchId }}</p>
+      <p>Résultat: {{ bet.outcome }}</p>
+      <p>Type: {{ bet.type }}</p>
+      <p>Mise: {{ bet.stake }}</p>
+      <p>Cote: {{ bet.odd }}</p>
+      <p>Statut: {{ bet.status }}</p>
+      <p>Créé le: {{ bet.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@ import {
   CompetitionSelectorComponent
 } from '../components/competitions/competition-selector/competition-selector.component';
 import {MatchListComponent} from '../components/matches/match-list/match-list.component';
-import {BetComponent} from '../components/bet/bet/bet.component';
+import {BetListComponent} from '../components/bet/bet-list/bet-list.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +15,6 @@ export const routes: Routes = [
   { path: 'competitions', component: CompetitionSelectorComponent },
   { path: 'matches/:competitionId', component: MatchListComponent },
   { path: '', redirectTo: '/competitions', pathMatch: 'full' },
-  { path: 'bet', component: BetComponent }
+  { path: 'bet', component: BetListComponent }
 
 ];
