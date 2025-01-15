@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import { HttpHeaders } from '@angular/common/http';
 export class AuthService {
   private token: string | null = null;
   private role: string | null = null;
+
+  constructor(private http: HttpClient) { }
 
   // Stocke le token dans le service et le localStorage
   setToken(token: string): void {
@@ -44,5 +47,9 @@ export class AuthService {
     this.token = null;
     this.role = null;
     localStorage.removeItem('authToken');
+  }
+
+  login(username: string, password: string): any {
+    return this.http.post(`http://localhost:3000/users/login`, { username, password });
   }
 }

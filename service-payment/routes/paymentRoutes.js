@@ -59,7 +59,8 @@ router.get('/history', async (req, res) => {
 // Paiement des gagnants
 router.post('/pay-winnings', async (req, res) => {
     try {
-        const { userId, amount } = req.body;
+        const {amount} = req.body;
+        const userId = req.headers['x-user-id'];
 
         if (amount <= 0) {
             return res.status(400).json({ error: 'Le montant doit être positif' });
@@ -69,7 +70,7 @@ router.post('/pay-winnings', async (req, res) => {
             userId,
             amount,
             type: 'win_payment',
-            status: 'completed'
+            createdAt: new Date()
         });
         await payment.save();
         res.status(201).json(payment);

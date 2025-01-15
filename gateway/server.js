@@ -61,6 +61,7 @@ app.get('/payments/wallet', verifyToken, authorizeRole('parieur'), paymentServic
 app.get('/payments/history', verifyToken, authorizeRole('parieur'), paymentServiceProxy);
 app.post('/bets/place', verifyToken, authorizeRole('parieur'), betServiceProxy);
 app.get('/bets/my-bets', verifyToken, authorizeRole('parieur'), betServiceProxy);
+app.put('/bets/result/:betId', verifyToken, authorizeRole('parieur'), betServiceProxy)
 
 // Routes bookmaker
 app.post('/odds/create', verifyToken, authorizeRole('bookmaker'), oddServiceProxy);

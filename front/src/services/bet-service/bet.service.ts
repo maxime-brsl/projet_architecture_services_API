@@ -27,4 +27,10 @@ export class BetService {
     headers = headers.set('Authorization', this.authService.getToken());
     return this.http.get(`${this.baseUrl}/my-bets`, { headers });
   }
+
+  setBetResult(betId: number, result: string): any {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.authService.getToken());
+    return this.http.put(`${this.baseUrl}/result/${betId}`, { result }, { headers });
+  }
 }

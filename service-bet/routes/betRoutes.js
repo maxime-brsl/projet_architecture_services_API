@@ -59,4 +59,32 @@ router.get('/my-bets', async (req, res) => {
     }
 });
 
+router.put('/result/:id', async (req, res) => {
+    try {
+        const result = req.body.result.toLowerCase();
+        if (result !== 'awayteam' && result !== 'hometeam' && result !== 'draw') {
+            return res.status(400).json({ message: 'Aucun resultat pour le match' });
+        }
+        const bet = await Bet.findById(req.params.id);
+        if (!bet) {
+            return res.status(404).json({ message: 'Pari introuvable' });
+        }
+
+        if (bet.outcome.toLowerCase() === result) {
+            await axios.post(`http://service-payment:3005/payments/pay-winnings`, {amount: bet.stake * bet.odd}, {
+                headers: { 'x-user-id': bet.userId }
+            });
+            bet.status = 'win';
+        } else {
+            bet.status = 'loose';
+        }
+
+        await bet.save();
+
+        res.status(200).json({ message: 'Résultat enregistré' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 export default router;

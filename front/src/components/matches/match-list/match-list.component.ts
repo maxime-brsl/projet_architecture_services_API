@@ -84,7 +84,7 @@ export class MatchListComponent implements OnInit {
 
   async handleOddsClick(matchId: number, outcome: string): Promise<void> {
     if (this.authService.getRole()?.toLowerCase() === 'bookmaker') {
-      dialogText('Ajouter une cote', 'Saisir ube cote').then((odd) => {
+      dialogText('Ajouter une cote', 'Saisir une cote').then((odd) => {
         if (odd == null) {
           return;
         }

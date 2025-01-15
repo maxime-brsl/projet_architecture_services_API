@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth-service/auth.service';
 import {FormsModule} from '@angular/forms';
+import {BetService} from '../../../services/bet-service/bet.service';
+import {MatchService} from '../../../services/match-service/match.service';
 
 @Component({
   selector: 'app-login',
@@ -18,23 +19,18 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private http: HttpClient,
-    private router: Router,
+    private router: Router
   ) {}
 
   login(): void {
-    this.http
-      .post<{ token: string, role: string }>('http://localhost:3000/users/login', {
-        username: this.username,
-        password: this.password,
-      })
+    this.authService.login(this.username, this.password)
       .subscribe({
-        next: (response) => {
+        next: (response: { token: string; role: string; }) => {
           this.authService.setToken(response.token);
           this.authService.setRole(response.role);
           this.router.navigate(['/competitions']).then();
         },
-        error: (err) => {
+        error: (err: any) => {
           if (err.status === 400) {
             alert('Identifiants incorrects');
             return;
