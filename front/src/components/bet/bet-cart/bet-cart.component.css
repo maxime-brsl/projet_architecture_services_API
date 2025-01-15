@@ -43,17 +43,21 @@
 }
 
 .cart button {
-  margin-top: 10px;
-  padding: 10px 20px;
+  width: 100%;
+  background-color: #e63946;
+  color: #ffffff;
+  padding: 12px;
   border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 10px;
 }
 
 .cart button:hover {
-  background-color: #0056b3;
+  background-color: #f77f00;
+  transform: scale(1.05);
 }

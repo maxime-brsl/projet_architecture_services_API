@@ -5,10 +5,11 @@
   </div>
   <div *ngIf="bets.length > 0">
     <div class="bet" *ngFor="let bet of bets">
-      <p>Match: {{ bet.matchId }}</p>
-      <p>Type: {{ bet.outcome }}</p>
-      <p>Mise: {{ bet.stake }}</p>
+      <p>Mon pari: {{ bet.outcome }}</p>
+      <p>Match: {{ bet.awayTeam }} vs {{ bet.homeTeam }}</p>
+      <p>Mise: {{ bet.stake }} €</p>
       <p>Cote: {{ bet.odd }}</p>
+      <p>Gain potentiel {{ bet.stake * bet.odd }} €</p>
     </div>
     <div class="bet-type-switch">
       <label>

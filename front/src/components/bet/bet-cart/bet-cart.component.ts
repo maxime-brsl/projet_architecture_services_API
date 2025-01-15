@@ -34,7 +34,8 @@ export class CartComponent implements OnInit {
   }
 
   clearBets() {
-    this.bets = [];
+    // this.bets = [];
+    console.log(this.bets)
   }
 
   hideCart() {

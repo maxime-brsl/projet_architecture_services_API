@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DatePipe, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
-import { OddsService } from '../../../services/odds-service/odds.service';
-import { AuthService } from '../../../services/auth-service/auth.service';
-import { dialogText } from '../../../util/popupTextInput';
-import { MatchService } from '../../../services/match-service/match.service';
-import { BetService } from '../../../services/bet-service/bet.service';
-import { CartService } from '../../../services/bet-cart-service/bet-cart.service';
-import { CartComponent } from '../../bet/bet-cart/bet-cart.component';
-import { firstValueFrom } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {OddsService} from '../../../services/odds-service/odds.service';
+import {AuthService} from '../../../services/auth-service/auth.service';
+import {dialogText} from '../../../util/popupTextInput';
+import {MatchService} from '../../../services/match-service/match.service';
+import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
+import {CartComponent} from '../../bet/bet-cart/bet-cart.component';
+import {firstValueFrom} from 'rxjs';
+import {Bet} from '../../../models/Bet';
+import {LoginComponent} from '../../user/login/login.component';
 
 @Component({
   selector: 'app-match-list',
@@ -115,10 +116,13 @@ export class MatchListComponent implements OnInit {
               alert('Le paris doit être supérieure à 0.10 €');
               return;
             }
-            const bet = {
+            const match = this.matches.find((match) => match.id === matchId);
+            const bet : Bet = {
               matchId,
+              outcome : outcome === 'homeTeam' ? match.homeTeam.name : match.awayTeam.name,
+              awayTeam: match.awayTeam.name,
+              homeTeam: match.homeTeam.name,
               type: 'simple',
-              outcome,
               stake: Number(stake),
               odd: oddsResponse.odds[outcome]
             };
