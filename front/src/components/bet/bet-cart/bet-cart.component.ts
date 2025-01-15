@@ -17,29 +17,21 @@ import {FormsModule} from '@angular/forms';
 export class CartComponent implements OnInit {
   bets: any[] = [];
   isCombined: boolean = false;
-  isVisible: boolean = false;
 
-  constructor(private betService: BetService, private cartService: CartService) {
+  constructor(private betService: BetService, protected cartService: CartService) {
   }
 
   ngOnInit() {
     this.bets = this.cartService.getBets();
-    this.cartService.cartVisible$.subscribe(visible => {
-      this.isVisible = visible;
-    });
   }
 
   toggleBetType() {
-    this.isCombined = !this.isCombined;
+    this.cartService.setCombined(this.isCombined);
   }
 
   clearBets() {
-    // this.bets = [];
-    console.log(this.bets)
-  }
-
-  hideCart() {
-    this.cartService.hideCart();
+    this.cartService.clearBets();
+    this.bets = [];
   }
 
   placeBet() {
@@ -55,11 +47,13 @@ export class CartComponent implements OnInit {
           alert('Pari placé avec succès');
         },
         error: (err: any) => {
+          if (err.status == '405') {
+            alert('Solde insuffisant');
+          }
           console.error('Erreur lors du placement du pari', err);
         }
       });
-      this.clearBets();
-      this.hideCart();
     }
+    this.clearBets();
   }
 }

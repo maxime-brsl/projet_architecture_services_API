@@ -18,7 +18,6 @@ const getMatches = async (competitionId) => {
 
 const getMatch = async (matchId) => {
     try {
-        console.log(`${baseUrl}/matches/${matchId}`);
         const response = await axios.get(`${baseUrl}/matches/${matchId}`, {
             headers: { 'X-Auth-Token': apiKey },
         });

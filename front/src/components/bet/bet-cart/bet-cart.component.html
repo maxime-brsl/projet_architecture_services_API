@@ -1,15 +1,15 @@
-<div class="cart" *ngIf="isVisible">
+<div class="cart">
   <h2>Votre panier</h2>
   <div *ngIf="bets.length === 0">
     <p>Votre panier est vide.</p>
   </div>
   <div *ngIf="bets.length > 0">
     <div class="bet" *ngFor="let bet of bets">
-      <p>Mon pari: {{ bet.outcome }}</p>
       <p>Match: {{ bet.awayTeam }} vs {{ bet.homeTeam }}</p>
+      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.homeTeam.name : bet.outcome === 'awayTeam' ? bet.awayTeam.name : 'Égalité' }}</p>
       <p>Mise: {{ bet.stake }} €</p>
       <p>Cote: {{ bet.odd }}</p>
-      <p>Gain potentiel {{ bet.stake * bet.odd }} €</p>
+      <p *ngIf="!cartService.getCombined()">Gain potentiel {{ bet.stake * bet.odd }} €</p>
     </div>
     <div class="bet-type-switch">
       <label>

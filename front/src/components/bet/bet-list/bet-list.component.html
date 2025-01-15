@@ -16,7 +16,7 @@
           <img *ngIf="bet.match.awayTeam.crest" ngSrc="{{bet.match.awayTeam.crest}}" alt="{{ bet.match.awayTeam.name }} flag" class="team-flag" width="30" height="30" />
         </div>
       </div>
-      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.match.homeTeam.name : bet.match.awayTeam.name }}</p>
+      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.match.homeTeam.name : bet.outcome === 'awayTeam' ? bet.match.awayTeam.name : "Égalité" }}</p>
       <p>Mise: {{ bet.stake }} €</p>
       <p>Cote: {{ bet.odd }}</p>
       <p>Gain potentiel : {{ bet.odd * bet.stake }} €</p>

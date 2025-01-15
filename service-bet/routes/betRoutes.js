@@ -24,21 +24,21 @@ router.post('/place', async (req, res) => {
                 headers: { 'x-user-id': userId }
             });
 
+        if (Number(walletResponse.data.wallet) < Number(stake)) {
+            return res.status(405).json({ message: 'Solde insuffisant' });
+        }
+
         await axios.post(`http://service-payment:3005/payments/pay`, {amount: stake, type: 'bet'}, {
             headers: { 'x-user-id': userId }
         });
 
-        if (walletResponse.data.wallet < stake) {
-            return res.status(405).json({ message: 'Solde insuffisant' });
-        }
-
         const bet = new Bet({
             userId: userId,
-            matchId,
-            outcome,
-            type,
-            stake,
-            odd,
+            matchId: matchId,
+            outcome: outcome,
+            type: type,
+            stake: stake,
+            odd: odd,
         });
 
         await bet.save();
@@ -52,8 +52,7 @@ router.post('/place', async (req, res) => {
 // Route pour récupérer les paris d'un utilisateur
 router.get('/my-bets', async (req, res) => {
     try {
-        const userId = req.headers['x-user-id'];
-        const bets = await Bet.find({ userId });
+        const bets = await Bet.find({ userId: req.headers['x-user-id'] });
         res.status(200).json(bets);
     } catch (err) {
         res.status(500).json({ error: err.message });

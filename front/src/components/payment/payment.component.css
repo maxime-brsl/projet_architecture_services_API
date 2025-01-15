@@ -67,14 +67,13 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 /* Style des cellules de la table */
 th, td {
   text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 /* Style des en-têtes de table */

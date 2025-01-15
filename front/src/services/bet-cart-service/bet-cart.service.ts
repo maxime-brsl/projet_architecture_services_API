@@ -5,18 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private cartVisible = new BehaviorSubject<boolean>(false);
-  cartVisible$ = this.cartVisible.asObservable();
   private bets: any[] = [];
+  private isCombined: boolean = false;
 
-  showCart() {
-    if (this.bets.length !== 0) {
-      this.cartVisible.next(true);
-    }
+  setCombined(combined: boolean) {
+    this.isCombined = combined;
   }
 
-  hideCart() {
-    this.cartVisible.next(false);
+  getCombined() {
+    return this.isCombined;
   }
 
   addBet(bet: any) {
@@ -25,5 +22,9 @@ export class CartService {
 
   getBets() {
     return this.bets;
+  }
+
+  clearBets() {
+    this.bets = [];
   }
 }

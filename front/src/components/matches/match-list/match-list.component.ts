@@ -119,7 +119,7 @@ export class MatchListComponent implements OnInit {
             const match = this.matches.find((match) => match.id === matchId);
             const bet : Bet = {
               matchId,
-              outcome : outcome === 'homeTeam' ? match.homeTeam.name : match.awayTeam.name,
+              outcome : outcome,
               awayTeam: match.awayTeam.name,
               homeTeam: match.homeTeam.name,
               type: 'simple',
@@ -127,7 +127,6 @@ export class MatchListComponent implements OnInit {
               odd: oddsResponse.odds[outcome]
             };
             this.cartService.addBet(bet);
-            this.cartService.showCart();
           });
         }
       } catch (err: any) {
