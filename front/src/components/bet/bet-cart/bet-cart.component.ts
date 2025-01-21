@@ -22,7 +22,9 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bets = this.cartService.getBets();
+    this.cartService.bets$.subscribe((bets) => {
+      this.bets = bets;
+    });
   }
 
   toggleBetType() {
@@ -36,10 +38,7 @@ export class CartComponent implements OnInit {
 
   placeBet() {
     if (this.isCombined) {
-      // this.bets = {
-      //   type: 'COMBINED',
-      //   bets: this.bets
-      // };
+      //Manque de temps pour implémenter la fonctionnalité
     }
     for (const bet of this.bets) {
       this.betService.placeBet(bet.matchId, bet.type, bet.outcome, bet.stake).subscribe({

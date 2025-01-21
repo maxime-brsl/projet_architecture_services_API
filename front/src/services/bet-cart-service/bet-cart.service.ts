@@ -5,7 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private bets: any[] = [];
+  private betsSubject = new BehaviorSubject<any[]>([]);
+  bets$ = this.betsSubject.asObservable();
   private isCombined: boolean = false;
 
   setCombined(combined: boolean) {
@@ -17,14 +18,15 @@ export class CartService {
   }
 
   addBet(bet: any) {
-    this.bets.push(bet);
+    const currentBets = this.betsSubject.value;
+    this.betsSubject.next([...currentBets, bet]);
   }
 
   getBets() {
-    return this.bets;
+    return this.betsSubject.value;
   }
 
   clearBets() {
-    this.bets = [];
+    this.betsSubject.next([]);
   }
 }

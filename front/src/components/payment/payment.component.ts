@@ -15,7 +15,7 @@ import {CommonModule, DatePipe} from '@angular/common';
 
 export class PaymentComponent implements OnInit {
   wallet = null;
-  history : Transaction[] = [];
+  history: Transaction[] = [];
 
   constructor(private paymentService: PaymentService) {
   }
@@ -86,6 +86,23 @@ export class PaymentComponent implements OnInit {
         this.history.sort((a, b) => {
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
+        //traduire le type
+        for (let transaction of this.history) {
+          switch (transaction.type) {
+            case 'deposit':
+              transaction.type = 'Dépôt';
+              break;
+            case 'win_payment':
+              transaction.type = 'Gain';
+              break;
+            case 'bet':
+              transaction.type = 'Pari';
+              break;
+            default:
+              transaction.type = 'Retrait';
+              break;
+          }
+        }
       },
       error: (err) => {
         console.error('Erreur lors de la récupération de l\'historique', err);

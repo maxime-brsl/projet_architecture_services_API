@@ -23,7 +23,24 @@ export class BetListComponent implements OnInit {
     this.betService.getBets().subscribe({
       next: (response: any) => {
         this.bets = response;
+        this.bets.sort((a, b) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
         for (const bet of this.bets) {
+          switch (bet.status) {
+            case 'win':
+              bet.status = 'Gagné';
+              break;
+            case 'loose':
+              bet.status = 'Perdu';
+              break;
+            case 'waiting':
+              bet.status = 'En attente';
+              break;
+            default:
+              bet.status = 'Inconnu';
+              break;
+          }
           this.matchService.getMatch(bet.matchId).subscribe({
             next: (response: any) => {
               bet.match = response
