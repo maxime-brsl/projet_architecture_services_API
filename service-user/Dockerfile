@@ -1,19 +1,20 @@
-# Utilisation de Node.js comme base
-FROM node:16
+# Utiliser une image Node.js compatible
+FROM node:20-alpine
 
 # Définir le répertoire de travail
 WORKDIR /app
 
+# Copier uniquement les fichiers package.json et package-lock.json
 COPY package*.json ./
 
 # Installer les dépendances
 RUN npm install
 
-# Copier tout le reste du code source
+# Copier le reste des fichiers
 COPY . .
 
-# Exposer le port
-EXPOSE 3001
+# Exposer le port de l'application
+EXPOSE 3000
 
-# Lancer le serveur
-CMD ["node", "app.js"]
+# Lancer l'application
+CMD ["npm", "start"]

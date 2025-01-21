@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import User from '../models/User.js';
 
 //On a mit la secret key ici car c'était la seule valeur qui n'arrivait pas à être lu
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcryptjs.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Mot de passe incorrect' });
 
         // Inclure l'ID et le rôle dans le token JWT

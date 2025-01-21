@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 
 const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
@@ -11,7 +11,7 @@ const UserSchema = new Schema({
 UserSchema.pre('save', async function() {
     if (this.isModified('password')) {
         try {
-            this.password = await bcrypt.hash(this.password, 10);
+            this.password = await bcryptjs.hash(this.password, 10);
         } catch (error) {
             throw new Error('Erreur lors du cryptage du mot de passe');
         }
