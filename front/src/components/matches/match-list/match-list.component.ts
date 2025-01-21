@@ -7,7 +7,7 @@ import {dialogText} from '../../../util/popupTextInput';
 import {MatchService} from '../../../services/match-service/match.service';
 import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
 import {CartComponent} from '../../bet/bet-cart/bet-cart.component';
-import {firstValueFrom} from 'rxjs';
+import {catchError, firstValueFrom, of} from 'rxjs';
 import {Bet} from '../../../models/Bet';
 import {LoginComponent} from '../../user/login/login.component';
 
@@ -49,7 +49,11 @@ export class MatchListComponent implements OnInit {
                 match.odds = response.odds;
               },
               error: (err) => {
-                console.error('Erreur lors de la récupération des cotes', err);
+                if (err.status === 404) {
+                  console.error("Aucune cote pour ce match");
+                } else {
+                  console.error('Erreur lors de la récupération des cotes', err);
+                }
               }
             });
           }
