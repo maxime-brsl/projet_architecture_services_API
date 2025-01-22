@@ -23,9 +23,7 @@ export class BetListComponent implements OnInit {
     this.betService.getBets().subscribe({
       next: (response: any) => {
         this.bets = response;
-        this.bets.sort((a, b) => {
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        });
+        const validBets: any[] = [];
         for (const bet of this.bets) {
           switch (bet.status) {
             case 'win':
@@ -43,10 +41,17 @@ export class BetListComponent implements OnInit {
           }
           this.matchService.getMatch(bet.matchId).subscribe({
             next: (response: any) => {
-              bet.match = response
+              bet.match = response;
+              validBets.push(bet);
             },
             error: (err: any) => {
               console.error('Erreur lors de la récupération du match', err);
+            },
+            complete: () => {
+              this.bets = validBets;
+              this.bets.sort((a, b) => {
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+              });
             }
           });
         }

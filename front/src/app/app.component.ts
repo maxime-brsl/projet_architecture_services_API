@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth-service/auth.service';
 import {NgIf} from '@angular/common';
 import {BetService} from '../services/bet-service/bet.service';
 import {MatchService} from '../services/match-service/match.service';
+import {timeout} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -37,31 +38,12 @@ export class AppComponent implements OnInit {
     if (!this.isAuthenticated()) {
       return;
     }
-    this.betService.getBets().subscribe({
-      next: (bets: any) => {
-        for (const bet of bets) {
-          if (bet.status !== 'waiting') {
-            return;
-          }
-          this.matchService.getMatch(bet.matchId).subscribe({
-            next: (match: any) => {
-              if (match.status !== 'FINISHED') {
-                return;
-              }
-              this.betService.setBetResult(bet._id, match.score.winner).subscribe({
-                next: () => {
-                  console.log('Résultat du pari mis à jour');
-                },
-                error: (err: any) => {
-                  console.error('Erreur lors de la mise à jour du pari', err);
-                }
-              });
-            },
-            error: (err: any) => {
-              console.error('Erreur lors de la récupération du match', err);
-            }
-          });
-        }
+    this.betService.checkBets().subscribe({
+      next: () => {
+        console.log('Résultat du pari mis à jour');
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la mise à jour du pari', err);
       }
     });
   }
