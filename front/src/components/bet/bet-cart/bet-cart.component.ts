@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
 import {BetService} from '../../../services/bet-service/bet.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,11 +15,11 @@ import {FormsModule} from '@angular/forms';
   ],
   styleUrls: ['./bet-cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   bets: any[] = [];
   isCombined: boolean = false;
 
-  constructor(private betService: BetService, protected cartService: CartService) {
+  constructor(private betService: BetService, protected cartService: CartService, protected authService: AuthService) {
   }
 
   ngOnInit() {
@@ -54,5 +55,9 @@ export class CartComponent implements OnInit {
       });
     }
     this.clearBets();
+  }
+
+  ngOnDestroy() {
+    this.cartService.clearBets();
   }
 }

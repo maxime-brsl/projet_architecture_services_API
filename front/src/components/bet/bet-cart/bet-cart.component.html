@@ -18,6 +18,6 @@
       </label>
     </div>
     <button (click)="clearBets()">Supprimer les paris</button>
-    <button (click)="placeBet()">Valider les paris</button>
+    <button (click)="placeBet()" [disabled]="!this.authService.isAuthenticated()">Valider les paris</button>
   </div>
 </div>

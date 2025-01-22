@@ -61,3 +61,8 @@
   background-color: #f77f00;
   transform: scale(1.05);
 }
+
+.cart button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
