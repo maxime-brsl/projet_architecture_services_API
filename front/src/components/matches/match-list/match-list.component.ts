@@ -111,7 +111,7 @@ export class MatchListComponent implements OnInit {
     } else if (this.authService.getRole()?.toLowerCase() === 'parieur') {
       try {
         const oddsResponse = await firstValueFrom(this.oddService.getOdd(matchId));
-        if (oddsResponse.odds[outcome] !== undefined) {
+        if (oddsResponse.odds['awayTeam'] > 1 && oddsResponse.odds['draw'] > 1 && oddsResponse.odds['homeTeam'] > 1) {
           dialogText('Ajouter une mise', 'Saisir une mise').then((stake) => {
             if (stake == null) {
               return;
@@ -132,6 +132,8 @@ export class MatchListComponent implements OnInit {
             };
             this.cartService.addBet(bet);
           });
+        } else {
+          alert('Les côtes n\'ont pas encore été totalement définies pour ce match');
         }
       } catch (err: any) {
         if (err.status === 405) {

@@ -66,3 +66,11 @@
   background-color: #cccccc;
   cursor: not-allowed;
 }
+
+.combined {
+  color: #555555;
+}
+
+.combined input{
+  cursor: not-allowed;
+}

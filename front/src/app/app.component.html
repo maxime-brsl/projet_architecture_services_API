@@ -3,7 +3,7 @@
   <a *ngIf="!isAuthenticated()" routerLink="/login">Connexion</a>
   <a *ngIf="!isAuthenticated()" routerLink="/register">Inscription</a>
   <a *ngIf="isAuthenticated()" routerLink="/me">Mon Compte</a>
-  <a *ngIf="isAuthenticated()" routerLink="/bet">Mes paris</a>
+  <a *ngIf="isAuthenticated() && this.authService.getRole() === 'parieur'" routerLink="/bet">Mes paris</a>
   <a class="logout" *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</a>
 </nav>
 

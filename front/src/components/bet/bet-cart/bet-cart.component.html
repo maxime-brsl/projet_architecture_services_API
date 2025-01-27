@@ -6,15 +6,15 @@
   <div *ngIf="bets.length > 0">
     <div class="bet" *ngFor="let bet of bets">
       <p>Match: {{ bet.awayTeam }} vs {{ bet.homeTeam }}</p>
-      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.homeTeam.name : bet.outcome === 'awayTeam' ? bet.awayTeam.name : 'Égalité' }}</p>
+      <p>Mon pari: {{ bet.outcome === 'homeTeam' ? bet.homeTeam : bet.outcome === 'awayTeam' ? bet.awayTeam : 'Égalité' }}</p>
       <p>Mise: {{ bet.stake }} €</p>
       <p>Cote: {{ bet.odd }}</p>
       <p *ngIf="!cartService.getCombined()">Gain potentiel {{ bet.stake * bet.odd }} €</p>
     </div>
     <div class="bet-type-switch">
-      <label>
-        <input type="checkbox" [(ngModel)]="isCombined" (change)="toggleBetType()">
-        Combiné
+      <label class="combined">
+        <input disabled type="checkbox" [(ngModel)]="isCombined" (change)="toggleBetType()">
+        Combiné (fonctionnalité future)
       </label>
     </div>
     <button (click)="clearBets()">Supprimer les paris</button>

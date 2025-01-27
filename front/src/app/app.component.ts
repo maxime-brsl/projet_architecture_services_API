@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import { AuthService } from '../services/auth-service/auth.service';
+import {AuthService} from '../services/auth-service/auth.service';
 import {NgIf} from '@angular/common';
 import {BetService} from '../services/bet-service/bet.service';
-import {MatchService} from '../services/match-service/match.service';
-import {timeout} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +18,7 @@ import {timeout} from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'The Real Deal';
 
-  constructor(private authService: AuthService, private router: Router, private betService: BetService,
-              private matchService: MatchService) {}
+  constructor(protected authService: AuthService, private router: Router, private betService: BetService) {}
 
   // Vérifie si l'utilisateur est authentifié
   isAuthenticated(): boolean {

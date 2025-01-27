@@ -91,7 +91,9 @@ export function dialogText(titre: string, placeholder: string): Promise<number |
 
     // Gestion des événements
     boutonConfirmer.addEventListener('click', () => {
-      resolve(Number(input.value));
+      const valeur = input.value.replace(',', '.');
+      const nombre = Number(valeur);
+      resolve(isNaN(nombre) ? null : nombre);
       document.body.removeChild(popup);
     });
 
