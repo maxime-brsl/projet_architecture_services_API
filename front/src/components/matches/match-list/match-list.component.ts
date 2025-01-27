@@ -7,9 +7,8 @@ import {dialogText} from '../../../util/popupTextInput';
 import {MatchService} from '../../../services/match-service/match.service';
 import {CartService} from '../../../services/bet-cart-service/bet-cart.service';
 import {CartComponent} from '../../bet/bet-cart/bet-cart.component';
-import {catchError, firstValueFrom, of} from 'rxjs';
+import {firstValueFrom} from 'rxjs';
 import {Bet} from '../../../models/Bet';
-import {LoginComponent} from '../../user/login/login.component';
 
 @Component({
   selector: 'app-match-list',

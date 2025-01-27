@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth-service/auth.service';
 import {FormsModule} from '@angular/forms';
-import {BetService} from '../../../services/bet-service/bet.service';
-import {MatchService} from '../../../services/match-service/match.service';
 
 @Component({
   selector: 'app-login',

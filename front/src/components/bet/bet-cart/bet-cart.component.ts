@@ -37,6 +37,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.bets = [];
   }
 
+  // Envoie les paris au micro service bet-service
   placeBet() {
     if (this.isCombined) {
       //Manque de temps pour implémenter la fonctionnalité

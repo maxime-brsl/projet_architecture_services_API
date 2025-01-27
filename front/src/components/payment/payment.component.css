@@ -31,29 +31,26 @@ div {
   color: #333;
 }
 
-/* Global styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* Conteneur de l'historique des transactions */
 .history-of-transaction {
-  position: fixed;  /* Positionner de manière fixe par rapport à la fenêtre */
-  top: 75px;        /* Marge depuis le haut de la page */
-  right: 20px;      /* Marge depuis la droite de la page */
-  background-color: white;  /* Fond blanc */
-  border: 1px solid #ccc;  /* Bordure grise */
-  padding: 20px;    /* Espace interne autour du contenu */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
-  z-index: 1000;    /* S'assurer que cette section soit au-dessus des autres éléments */
-  width: 350px;     /* Largeur fixe */
-  max-height: 550px; /* Hauteur maximale */
-  overflow-y: auto; /* Ajoute une barre de défilement verticale si le contenu dépasse */
+  position: fixed;
+  top: 75px;
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 350px;
+  max-height: 550px;
+  overflow-y: auto;
 }
 
-/* Titre de la section */
 .history-of-transaction h2 {
   font-size: 18px;
   margin: 0;
@@ -63,49 +60,41 @@ body {
   color: #333;
 }
 
-/* Style de la table */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-/* Style des cellules de la table */
 th, td {
   text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-/* Style des en-têtes de table */
 th {
   background-color: #f4f4f4;
   color: #555;
   font-weight: normal;
 }
 
-/* Style des lignes de la table */
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* Style au survol des lignes de la table */
 tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Style des colonnes "Montant" et "Type" */
 td {
   font-size: 14px;
   color: #555;
 }
 
-/* Style du texte monétaire */
 td:nth-child(2) {
   font-weight: bold;
-  color: #007bff; /* Couleur bleue pour le montant */
+  color: #007bff;
 }
 
-/* Pour la colonne "Type", on stylise les textes "Dépôt" et "Retrait" */
 td:nth-child(3) {
   font-style: italic;
 }

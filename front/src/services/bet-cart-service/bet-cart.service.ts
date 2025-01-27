@@ -22,10 +22,6 @@ export class CartService {
     this.betsSubject.next([...currentBets, bet]);
   }
 
-  getBets() {
-    return this.betsSubject.value;
-  }
-
   clearBets() {
     this.betsSubject.next([]);
   }

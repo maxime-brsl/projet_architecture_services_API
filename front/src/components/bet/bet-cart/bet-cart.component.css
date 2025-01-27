@@ -9,7 +9,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 300px;
   text-align: center;
-  z-index: 1000; /* Assurez-vous que le panier est au-dessus des autres éléments */
+  z-index: 1000;
 }
 
 .cart h2 {

@@ -17,7 +17,7 @@ export class AuthService {
     localStorage.setItem('authToken', token);
   }
 
-  // Récupère le token stocké, ou bien dans le service ou dans le localStorage
+  // Récupère le token stocké
   getToken(): string  {
     if (!this.token) {
       this.token = localStorage.getItem('authToken');
@@ -39,7 +39,7 @@ export class AuthService {
 
   // Vérifie si l'utilisateur est authentifié (si un token est présent)
   isAuthenticated(): boolean {
-    return !!this.getToken(); // Renvoie true si un token est présent
+    return !!this.getToken();
   }
 
   // Supprime le token pour déconnecter l'utilisateur
