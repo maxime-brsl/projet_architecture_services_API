@@ -136,10 +136,7 @@ export class MatchListComponent implements OnInit {
           alert('Les côtes n\'ont pas encore été totalement définies pour ce match');
         }
       } catch (err: any) {
-        if (err.status === 405) {
-          alert('Vous n\navez pas assez de crédit pour placer ce pari');
-        }
-        console.error('Erreur lors de la récupération des cotes', err);
+          console.error('Erreur lors de la récupération des cotes', err);
       }
     }
   }
