@@ -103,6 +103,7 @@ export class MatchListComponent implements OnInit {
             }
           },
           error: (err) => {
+            alert('Erreur lors de l\'ajout de la cote');
             console.error('Erreur lors de l\'ajout de la cote', err);
           }
         });
