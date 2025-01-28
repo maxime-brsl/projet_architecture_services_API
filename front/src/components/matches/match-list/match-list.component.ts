@@ -117,7 +117,7 @@ export class MatchListComponent implements OnInit {
               return;
             }
             if (Number(stake) < 0.1) {
-              alert('Le paris doit être supérieure à 0.10 €');
+              alert('Le paris doit être supérieur à 0.10 €');
               return;
             }
             const match = this.matches.find((match) => match.id === matchId);
