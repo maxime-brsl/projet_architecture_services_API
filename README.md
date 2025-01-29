@@ -18,7 +18,7 @@ Pour arrêter les microservices, il faut exécuter la commande suivante :
 docker-compose down
 ```
 
-## Auteur
+## Auteurs
 
 * Julie Barthet (julie.barthet1@etu.univ-lorraine.fr)
 * Maxime Brasley (maxime.brasley3@etu.univ-lorraine.fr)
